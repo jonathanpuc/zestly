@@ -38,7 +38,7 @@ export default LogoNav
 const Outer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 1rem;
+    padding: 1.5rem 1rem 1rem 1rem;
 `
 
 const Logo = styled.img`
@@ -52,5 +52,6 @@ const BackArrow = styled.div`
     justify-self: center;
     align-items: center;
     cursor: pointer;
+    display: flex;
 `
 

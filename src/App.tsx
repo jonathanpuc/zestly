@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import styled from 'styled-components'
 import './App.css';
-// import Navigation from './components/general/Navigation'
+
 
 import Routes from './Routes'
 

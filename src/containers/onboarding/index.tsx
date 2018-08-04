@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components'
-import Button from '../components/general/Button'
-import OnboardingLine from '../components/profile/OnboardingLine'
-import SmallButton from '../components/general/SmallButton'
-import ProfilePhotoGrid from '../components/profile/ProfilePhotoGrid'
-import LogoNav from '../components/general/LogoNav'
+import Button from '../../components/general/Button'
+import OnboardingLine from './OnboardingLine'
+import SmallButton from '../../components/general/SmallButton'
+import ProfilePhotoGrid from '../../components/profile/ProfilePhotoGrid'
+import LogoNav from '../../components/general/LogoNav'
 interface IOnboardingState {
     showing: string,
     name: string,

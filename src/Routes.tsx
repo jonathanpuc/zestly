@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Route, Switch, Redirect, Link } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import styled from 'styled-components'
-import Onboarding from './containers/Onboarding'
+import Onboarding from './containers/onboarding'
 import Login from './containers/login'
+import Home from './containers/home'
 // import Home from "./containers/Home";
 // import Notes from "./containers/Notes";
 // import Login from "./containers/Login";
@@ -44,17 +45,7 @@ const UnauthenticatedRoute = ({ component: Component, authenticated, ...rest }: 
                     to='/'
                 />}
     />;
-// tslint:disable-next-line
-class Home extends React.Component {
-    public render() {
-        return (
-            <div>
-                Home baby
-                <Link to="/login" >Login</Link>
-            </div>
-        )
-    }
-}
+
 
 
 

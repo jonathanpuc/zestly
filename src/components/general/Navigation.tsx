@@ -139,7 +139,7 @@ const MessagesIcon = styled.li`
 `
 
 const Nav = styled.ul`
-    overflow: hidden;
+
     height: 5.6rem;
     padding-top: 2rem;
 

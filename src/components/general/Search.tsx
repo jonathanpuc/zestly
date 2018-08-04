@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components'
-
+import magnify from '../../img/icons/magnify.svg'
+import cross from '../../img/icons/cross.svg'
 interface ISearchBarState {
     query: string
 }
@@ -23,7 +24,7 @@ class Searchbar extends React.Component<{}, ISearchBarState> {
                     onChange={this.handleChange}
                     type="text"
                     placeholder="Search meets" />
-                <Icon>{this.state.query ? 'X' : '🔍'}</Icon>
+                <Icon>{this.state.query ? <img src={cross} alt="clear search" /> : <img src={magnify} alt="search" />}</Icon>
             </Outer>
         )
     }
@@ -39,22 +40,24 @@ const Outer = styled.div`
     width: 35rem;
     height: 4.8rem;
     border-radius: 4px;
-    border: 1px solid #F0F0F0;
+    border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
     font-family: 'Larsseit';
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-left: 15px;
     position: relative;
+    transition: all 0.5s linear;
       input {
         color: ${(props: any) => props.query && props.theme.green};
         font-weight: ${(props: any) => props.query ? 'bold' : '300'};
         font-family: inherit;
         font-size: 1.8rem;
         height: 4.8rem;
+        transition: border 0.5s linear;
 
-        border-top: 1px solid #F0F0F0;
-        border-bottom: 1px solid #F0F0F0;
+        border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
+        border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
         border-left: none;
         border-right: none;
         flex: 10;
