@@ -5,6 +5,7 @@ import ButtonStyle from '../styles/Button'
 interface IButtonProps {
     onClick?: () => void;
     filled?: boolean;
+    bgColor?: string;
     children?: any;
     disabled?: boolean;
 }
@@ -28,7 +29,7 @@ const Outer = ButtonStyle.extend`
     width: 32rem;
     border: 1px solid ${props => props.theme.blue};
     color: ${(props: any) => props.filled ? '#fff' : props.theme.blue};
-    background-color: ${(props: any) => props.filled && props.theme.blue};
+    background-color: ${(props: any) => props.filled && props.bgColor ? `${props.theme[props.bgColor]}` : props.theme.blue};
     &:disabled {
         opacity: 0.5;
     }

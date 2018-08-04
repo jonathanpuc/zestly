@@ -7,6 +7,7 @@ import CardMeetCTA from '../../components/meet/cards/CardMeetCTA'
 import CardBlock from '../../components/meet/cards/CardBlock'
 import CardLarge from '../../components/meet/cards/CardLarge'
 import Slider from '../../components/general/Slider'
+import Button from '../../components/general/Button'
 interface IHomeState {
     meets: string[]
 }
@@ -88,14 +89,16 @@ export default class Home extends React.Component<{}, IHomeState> {
                         <button>More meets</button>
                     </section>
                 </MainContent>
-
+                <Sticky>
+                    <Button filled={true} bgColor="purple">Organise feast</Button>
+                </Sticky>
             </div>
         )
     }
 }
 
 const MainContent = styled.div`
-
+    padding-bottom: 5rem;
 
 
     h2 {
@@ -114,19 +117,37 @@ const MainContent = styled.div`
         padding-left: 6px;
         display: flex;
         flex-direction: column;
-        button {
-        height: 3.2rem;	
-        width: 13rem;	
-        font-size: 1.6rem;
-        border-radius: 4px;	
-        font-family: Larsseit;
-        color: ${props => props.theme.grey};
-        font-weight: 300;
-        letter-spacing: .5px;
-        border: 1px solid ${props => props.theme.grey};
-        margin: 2.2rem auto auto auto;
-        cursor: pointer;  
-        background-color: #fff;  
-        }
+            button {
+                height: 3.2rem;	
+                width: 13rem;	
+                font-size: 1.6rem;
+                border-radius: 4px;	
+                font-family: Larsseit;
+                color: ${props => props.theme.grey};
+                font-weight: 300;
+                letter-spacing: .5px;
+                border: 1px solid ${props => props.theme.grey};
+                margin: 2.2rem auto 2.2rem auto;
+                cursor: pointer;  
+                background-color: #fff;  
+            }
+    }
+`
+
+const Sticky = styled.div`
+    position: fixed;
+    bottom: 0;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    background-image: -webkit-repeating-linear-gradient( bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    background-image: -moz-repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    background-image: -ms-repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    background-image: -o-repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    background-image: repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    button {
+        margin-bottom: 1.5rem;
     }
 `
