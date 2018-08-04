@@ -1,8 +1,8 @@
 import * as React from 'react';
 // import styled from 'styled-components'
 import './App.css';
-import Navigation from './components/general/Navigation'
-// import Login from './containers/login'
+// import Navigation from './components/general/Navigation'
+
 import Routes from './Routes'
 
 interface IState {
@@ -25,9 +25,11 @@ class App extends React.Component<{}, IState> {
   public render() {
     return (
       <div className="App">
-        <Navigation />
-        {/* <Login /> */}
         <Routes authenticated={this.state.authenticated} />
+
+
+
+
 
       </div>
     );

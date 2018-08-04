@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route, Switch, Redirect, Link } from "react-router-dom";
 import styled from 'styled-components'
 import Onboarding from './containers/Onboarding'
+import Login from './containers/login'
 // import Home from "./containers/Home";
 // import Notes from "./containers/Notes";
 // import Login from "./containers/Login";
@@ -40,7 +41,7 @@ const UnauthenticatedRoute = ({ component: Component, authenticated, ...rest }: 
             !authenticated
                 ? <Component />
                 : <Redirect
-                    to='/home'
+                    to='/'
                 />}
     />;
 // tslint:disable-next-line
@@ -54,24 +55,15 @@ class Home extends React.Component {
         )
     }
 }
-// tslint:disable-next-line
-class Login extends React.Component {
-    public render() {
-        return (
-            <div>
-                Login baby
-                <Link to="/home" >Home</Link>
-            </div>
-        )
-    }
-}
+
+
 
 const Routes = ({ authenticated }: { authenticated: boolean }) => (
 
     <Container>
         <Content>
             <Switch>
-                <AuthenticatedRoute path="/home" exact={true} component={Home} authenticated={authenticated} />
+                <AuthenticatedRoute path="/" exact={true} component={Home} authenticated={authenticated} />
                 <UnauthenticatedRoute path="/login" exact={true} component={Login} authenticated={authenticated} />
                 <AuthenticatedRoute path="/onboarding" exact={true} component={Onboarding} authenticated={authenticated} />
                 {/* <Route path="/" exact component={Home} props={childProps} /> */}
@@ -85,12 +77,12 @@ const Routes = ({ authenticated }: { authenticated: boolean }) => (
 export default Routes
 
 const Container = styled.div`
-    max-width: 90%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    /* max-width: 90%;
+    margin: 0 auto; */
+    /* display: flex;
+    justify-content: center; */
 `
 
 const Content = styled.div`
-    display: inline-block;
+    /* display: inline-block; */
 `

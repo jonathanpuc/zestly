@@ -2,7 +2,8 @@ import * as React from 'react'
 import styled from 'styled-components'
 import EmailLoginInterface from './EmailLogin'
 import LogoNav from '../../components/general/LogoNav'
-
+import logo from '../../img/logo.svg'
+import homeBG from './home.png'
 interface IState {
     emailAuth: boolean
 }
@@ -23,8 +24,9 @@ export default class Login extends React.Component<{}, IState> {
     public renderMain = (): React.ReactElement<'div'> => {
         return (
             <MainOuter>
-                <div />
-
+                <Banner>
+                    <img src={logo} alt="zestly logo" />
+                </Banner>
                 <MainInterface>
                     <h2>Share experiences. <span>Meet new people.</span></h2>
                     <SocialButtons>
@@ -45,9 +47,9 @@ export default class Login extends React.Component<{}, IState> {
     public render() {
         return (
             <Outer>
-                <LogoNav backPage={this.state.emailAuth} onBackClick={this.handleBackClick} />
+
                 {
-                    this.state.emailAuth ? <EmailLoginInterface /> : this.renderMain()
+                    this.state.emailAuth ? <React.Fragment><LogoNav backPage={this.state.emailAuth} onBackClick={this.handleBackClick} /><EmailLoginInterface /></React.Fragment> : this.renderMain()
                 }
             </Outer>
 
@@ -60,12 +62,17 @@ const Outer = styled.div`
 
 const MainOuter = styled.div`
     background-color: ${props => props.theme.purple};
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    height: 100vh;
 
-    > div:first-child {
-        background-color: ${props => props.theme.purple};
-    }
+`
+
+const Banner = styled.div`
+    background: url(${homeBG});
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding: 1rem;
+    height: 50vh;
 `
 
 const MainInterface = styled.div`
@@ -78,6 +85,8 @@ const MainInterface = styled.div`
 	background-color: #fff;
     box-shadow: 0 -3px 7px 0 rgba(0,0,0,0.1);
     text-align: center;
+    height: 50vh;
+    
     h2 {
         color: ${props => props.theme.purple};
         font-size: 1.8rem;

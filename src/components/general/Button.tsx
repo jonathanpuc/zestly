@@ -39,5 +39,6 @@ const Outer = ButtonStyle.extend`
         border-width: ${(props: any) => !props.filled && '2px'};
         box-shadow: ${(props: any) => props.filled && `0 0 3pt 3pt ${props.theme.offwhite}`};
     }
+    transition: all 0.3s ease;
 `
 export default Button

@@ -4,6 +4,7 @@ import Button from '../components/general/Button'
 import OnboardingLine from '../components/profile/OnboardingLine'
 import SmallButton from '../components/general/SmallButton'
 import ProfilePhotoGrid from '../components/profile/ProfilePhotoGrid'
+import LogoNav from '../components/general/LogoNav'
 interface IOnboardingState {
     showing: string,
     name: string,
@@ -51,6 +52,14 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
         }
     }
 
+    public goBackStep = () => {
+        if (this.state.showing === 'second') {
+            this.setState({ showing: 'first' })
+        } else {
+            this.setState({ showing: 'second' })
+        }
+    }
+
     public render() {
         const descriptionTitle = {
             first: 'Nice tell me a little about yourself?',
@@ -59,7 +68,7 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
         }
 
         const renderProfileDetails = () => (
-            <div>
+            <LineBlock>
                 <OnboardingLine
                     before='My name is'
                     name='name'
@@ -74,17 +83,17 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
                     inputSize='small'
                     onChange={this.handleLineChange}
                 />
-            </div>
+            </LineBlock>
         )
 
         const renderPhotoDetails = () => (
-            <div>
+            <React.Fragment>
                 <ProfilePhotoGrid />
-            </div>
+            </React.Fragment>
         )
 
         const renderLocationDetails = () => (
-            <div>
+            <LineBlock>
                 <OnboardingLine
                     before='I live in'
                     name='suburb'
@@ -114,12 +123,13 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
                         onClick={() => this.handleDistanceChange('20')}>20 km</SmallButton>
                 </DistanceButtons>
                 <FillerLine>away from me</FillerLine>
-            </div>
+            </LineBlock>
         )
 
 
         return (
-            <div>
+            <MainOuter>
+                <LogoNav backPage={this.state.showing !== 'first'} onBackClick={this.goBackStep} />
                 <Description>{descriptionTitle[this.state.showing]}</Description>
                 {
                     this.state.showing === 'first' ?
@@ -129,10 +139,15 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
                 <ButtonWrapper>
                     <Button filled={true} onClick={this.nextDetails} disabled={!this.validateStep()}>Next</Button>
                 </ButtonWrapper>
-            </div>
+            </MainOuter>
         )
     }
 }
+
+const MainOuter = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
 const ButtonWrapper = styled.div`
     margin-top: 3rem;
@@ -142,7 +157,11 @@ const ButtonWrapper = styled.div`
 
 const Description = styled.p`
     color: ${props => props.theme.grey};
-    margin-bottom: 20px;
+
+    width: 80%;
+    margin: 30px auto 20px auto;
+    text-align: left;
+
 `
 const FillerLine = styled.p`
     color: ${props => props.theme.blue};
@@ -154,9 +173,17 @@ const FillerLine = styled.p`
     }
 `
 
+const LineBlock = styled.div`
+    display: inline-block;
+    margin: 0 auto;
+`
+
 const DistanceButtons = styled.div`
-    button {
-        margin-right: 1rem;
-    }
+    display: flex;
+    justify-content: space-between;
+    overflow-x: scroll;
     margin-bottom: 1.8rem;
+    button {
+        transition: all 0.3s ease;
+    }
 `
