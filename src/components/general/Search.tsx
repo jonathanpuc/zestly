@@ -39,6 +39,7 @@ const Outer = styled.div`
     font-size: 1.6px;
     width: 35rem;
     height: 4.8rem;
+    margin: 0 auto;
     border-radius: 4px;
     border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
     font-family: 'Larsseit';
