@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="12px" viewBox="0 0 7 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>CC568C80-04A5-4007-82A9-F10286947D21</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M0.171872206,5.57814746 L5.70310902,0.140660428 C5.79685879,0.046910651 5.92185874,3.57627869e-05 6.07810812,3.57627869e-05 C6.23435751,3.57627869e-05 6.37498218,0.046910651 6.49998212,0.140660428 L6.82810634,0.515659533 C6.95310628,0.60940931 7.01560589,0.73440925 7.01560589,0.890658639 C7.01560589,1.04690803 6.95310628,1.18753269 6.82810634,1.31253263 L2.04686774,6.00002146 L6.82810634,10.6875103 C6.92185611,10.8125102 6.968731,10.9531349 6.968731,11.1093843 C6.968731,11.2656337 6.92185611,11.3906336 6.82810634,11.4843834 L6.49998212,11.8125076 C6.37498218,11.9375075 6.23435751,12.0000072 6.07810812,12.0000072 C5.92185874,12.0000072 5.79685879,11.9375075 5.70310902,11.8125076 L0.171872206,6.37502056 C0.0781224295,6.28127079 0.0312475413,6.15627085 0.0312475413,6.00002146 C0.0312475413,5.84377207 0.0781224295,5.7031474 0.171872206,5.57814746 Z" id="path-1"></path>
+    </defs>
+    <g id="Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Typography" transform="translate(-206.000000, -2058.000000)">
+            <g id="Icons-/-Back" transform="translate(198.000000, 2052.000000)">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                <g id="-Colours-/-shades-/-Grey" stroke-width="1" fill-rule="evenodd" transform="translate(8.000000, 6.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#ACACAC" xlink:href="#path-1"></use>
+                    <g id="-Colours-/-shades-/-68" mask="url(#mask-2)" fill="#ACACAC">
+                        <g transform="translate(-8.000000, -6.000000)" id="Rectangle-2-Copy-5">
+                            <rect x="0" y="0" width="24" height="24" rx="4"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
