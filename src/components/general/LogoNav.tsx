@@ -2,8 +2,9 @@ import * as React from 'react'
 import styled from 'styled-components'
 import logo from '../../img/logo.svg'
 import arrowLeft from '../../img/icons/arrow-left.svg'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
-interface IProps {
+interface IProps extends RouteComponentProps<{}> {
     backPage: boolean,
     onBackClick?: () => void
 }
@@ -14,7 +15,7 @@ const LogoNav: React.SFC<IProps> = (props) => {
         if (props.onBackClick) {
             props.onBackClick()
         } else {
-            // this.props.history().back
+            props.history.goBack()
         }
 
     }
@@ -33,12 +34,12 @@ const LogoNav: React.SFC<IProps> = (props) => {
 
 }
 
-export default LogoNav
+export default withRouter(LogoNav)
 
 const Outer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 1.5rem 1rem 1rem 1rem;
+    padding: 2.3rem 1rem 1rem 1rem;
 `
 
 const Logo = styled.img`

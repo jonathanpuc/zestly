@@ -11,5 +11,6 @@ const Button = styled.button`
     &:focus {
         outline: none;
     }
+    cursor: pointer;
 `
 export default Button

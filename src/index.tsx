@@ -6,10 +6,14 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { theme } from './theme'
 
-import { BrowserRouter as Router } from "react-router-dom";
+import createHistory from 'history/createBrowserHistory'
+
+export const rootHistory = createHistory();
+
+import { Router } from "react-router-dom";
 
 ReactDOM.render(
-  <Router>
+  <Router history={rootHistory}>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>

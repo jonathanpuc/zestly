@@ -22,15 +22,12 @@ class App extends React.Component<{}, IState> {
   public handleClick = () => {
     console.log('clicked')
   }
+
+
   public render() {
     return (
       <div className="App">
         <Routes authenticated={this.state.authenticated} />
-
-
-
-
-
       </div>
     );
   }

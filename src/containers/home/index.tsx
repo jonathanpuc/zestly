@@ -2,12 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components'
 // import Button from '../../components/general/Button'
 import Search from '../../components/general/Search'
-import Navigation from '../../components/general/Navigation'
 import CardMeetCTA from '../../components/meet/cards/CardMeetCTA'
 import CardBlock from '../../components/meet/cards/CardBlock'
 import CardLarge from '../../components/meet/cards/CardLarge'
 import Slider from '../../components/general/Slider'
 import Button from '../../components/general/Button'
+import ButtonStyle from '../../components/styles/Button'
 interface IHomeState {
     meets: string[]
 }
@@ -55,8 +55,6 @@ export default class Home extends React.Component<{}, IHomeState> {
 
         return (
             <div>
-                <Navigation />
-                <br />
                 <Search />
                 <MainContent>
                     <section>
@@ -69,7 +67,7 @@ export default class Home extends React.Component<{}, IHomeState> {
                             <CardBlock />
                             <CardBlock />
                         </Slider>
-                        <button>More meets</button>
+                        <SectionButton>More meets</SectionButton>
                     </section>
                     <div>
                         <CardMeetCTA />
@@ -86,7 +84,7 @@ export default class Home extends React.Component<{}, IHomeState> {
                             <CardLarge />
                             <CardLarge />
                         </Slider>
-                        <button>More meets</button>
+                        <SectionButton>More meets</SectionButton>
                     </section>
                 </MainContent>
                 <Sticky>
@@ -117,21 +115,17 @@ const MainContent = styled.div`
         padding-left: 6px;
         display: flex;
         flex-direction: column;
-            button {
-                height: 3.2rem;	
+    }
+`
+
+const SectionButton = styled(ButtonStyle) `
+           height: 3.2rem;	
                 width: 13rem;	
-                font-size: 1.6rem;
                 border-radius: 4px;	
-                font-family: Larsseit;
                 color: ${props => props.theme.grey};
-                font-weight: 300;
                 letter-spacing: .5px;
                 border: 1px solid ${props => props.theme.grey};
                 margin: 2.2rem auto 2.2rem auto;
-                cursor: pointer;  
-                background-color: #fff;  
-            }
-    }
 `
 
 const Sticky = styled.div`
@@ -149,5 +143,6 @@ const Sticky = styled.div`
     background-image: repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
     button {
         margin-bottom: 1.5rem;
+        border: none;
     }
 `

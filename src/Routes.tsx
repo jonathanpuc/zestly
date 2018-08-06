@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import styled from 'styled-components'
 import Onboarding from './containers/onboarding'
 import Login from './containers/login'
-import Home from './containers/home'
+import Meets from './containers/meets'
+import Dashboard from './containers/dashboard'
+// import Navigation from './components/general/Navigation'
 // import Home from "./containers/Home";
 // import Notes from "./containers/Notes";
 // import Login from "./containers/Login";
@@ -44,36 +45,27 @@ const UnauthenticatedRoute = ({ component: Component, authenticated, ...rest }: 
                 : <Redirect
                     to='/'
                 />}
-    />;
+    />
 
 
+const NotFound = () => (
+    <div>
+        Not found man
+            </div>
+)
 
 
 const Routes = ({ authenticated }: { authenticated: boolean }) => (
 
-    <Container>
-        <Content>
-            <Switch>
-                <AuthenticatedRoute path="/" exact={true} component={Home} authenticated={authenticated} />
-                <UnauthenticatedRoute path="/login" exact={true} component={Login} authenticated={authenticated} />
-                <AuthenticatedRoute path="/onboarding" exact={true} component={Onboarding} authenticated={authenticated} />
-                {/* <Route path="/" exact component={Home} props={childProps} /> */}
-                { /* Finally, catch all unmatched routes */}
-                {/* <Route component={NotFound} /> */}
-            </Switch>
-        </Content>
-    </Container>
+    <Switch>
+        <AuthenticatedRoute path="/home" exact={false} component={Dashboard} authenticated={authenticated} />
+        <UnauthenticatedRoute path="/login" exact={false} component={Login} authenticated={authenticated} />
+        <AuthenticatedRoute path="/onboarding" exact={false} component={Onboarding} authenticated={authenticated} />
+        <AuthenticatedRoute path="/meets" exact={false} component={Meets} authenticated={authenticated} />
+        <Route component={NotFound} />
+    </Switch>
+
 )
 
 export default Routes
 
-const Container = styled.div`
-    /* max-width: 90%;
-    margin: 0 auto; */
-    /* display: flex;
-    justify-content: center; */
-`
-
-const Content = styled.div`
-    /* display: inline-block; */
-`
