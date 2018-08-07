@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import logo from '../../img/logo.svg'
 import arrowLeft from '../../img/icons/arrow-left.svg'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-
+import share from '../../img/icons/share.svg'
 interface IProps extends RouteComponentProps<{}> {
     backPage: boolean,
-    onBackClick?: () => void
+    onBackClick?: () => void,
+    shareButton?: boolean
 }
 
 const LogoNav: React.SFC<IProps> = (props) => {
@@ -20,6 +21,10 @@ const LogoNav: React.SFC<IProps> = (props) => {
 
     }
 
+    const shareFunction = () => {
+        console.log('share clicked')
+    }
+
     return (
         <Outer>
             {
@@ -27,8 +32,9 @@ const LogoNav: React.SFC<IProps> = (props) => {
                     <BackArrow onClick={handleBackClick}><img src={arrowLeft} alt="go back" /></BackArrow>
                 )
             }
-            <Logo src={logo} alt="zestly" />
+            <Logo><img src={logo} alt="zestly" /></Logo>
 
+            {props.shareButton && <div onClick={shareFunction}><img src={share} alt='share meet' /></div>}
         </Outer>
     )
 
@@ -40,9 +46,17 @@ const Outer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 2.3rem 1rem 1rem 1rem;
+
+    > div:last-child {
+        align-items: center;
+        cursor: pointer;
+        grid-column: 3 / 4;
+        justify-self: end;
+        padding-right: 20px;
+    }
 `
 
-const Logo = styled.img`
+const Logo = styled.h1`
     grid-column: 2 / 3;
     justify-self: center;
     align-items: center;
@@ -50,9 +64,8 @@ const Logo = styled.img`
 
 const BackArrow = styled.div`
     grid-column: 1 / 2;
-    justify-self: center;
     align-items: center;
     cursor: pointer;
-    display: flex;
+    padding-left: 20px;
 `
 

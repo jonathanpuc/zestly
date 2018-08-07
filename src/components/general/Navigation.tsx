@@ -80,7 +80,7 @@ export default class extends React.Component<{}, INavigationState> {
                 },
                 profile: {
                     left: '0%',
-                    right: '0%',
+                    right: '',
                     translateX: '0'
                 }
             }
@@ -115,7 +115,7 @@ export default class extends React.Component<{}, INavigationState> {
             <Outer>
                 <Nav viewing={this.state.viewing} styles={this.state.styles}>
                     <ProfileIcon ><img onClick={this.onProfileSelected} src={profile} alt="profile" /></ProfileIcon>
-                    <LogoIcon onClick={this.onLogoSelected}><img src={logo} alt="logo" /></LogoIcon>
+                    <LogoIcon onClick={this.onLogoSelected}><h1><img src={logo} alt="zestly" /></h1></LogoIcon>
                     <MessagesIcon ><img src={chat} onClick={this.onMessageSelected} alt="messages" /></MessagesIcon>
                 </Nav>
             </Outer>
@@ -127,23 +127,23 @@ const Outer = styled.div`
     margin-top: 1rem;
 `
 
-const ProfileIcon = styled.li`
+const ProfileIcon = styled.div`
     font-size: 2rem;
     color: ${props => props.theme.purple};
     font-weight: bold;
 `
-const LogoIcon = styled.li`
+const LogoIcon = styled.div`
     margin-top: -5px;
 `
-const MessagesIcon = styled.li`
+const MessagesIcon = styled.div`
 `
 
-const Nav = styled.ul`
+const Nav = styled.nav`
 
     height: 5.6rem;
     padding-top: 2rem;
 
-    li {
+    div {
         transition: all 0.1s linear;
         position: absolute;
         display: inline-block;
