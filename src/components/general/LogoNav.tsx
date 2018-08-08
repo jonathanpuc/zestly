@@ -29,12 +29,12 @@ const LogoNav: React.SFC<IProps> = (props) => {
         <Outer>
             {
                 props.backPage && (
-                    <BackArrow onClick={handleBackClick}><img src={arrowLeft} alt="go back" /></BackArrow>
+                    <BackArrow ><img onClick={handleBackClick} src={arrowLeft} alt="go back" /></BackArrow>
                 )
             }
             <Logo><img src={logo} alt="zestly" /></Logo>
 
-            {props.shareButton && <div onClick={shareFunction}><img src={share} alt='share meet' /></div>}
+            {props.shareButton && <div ><img onClick={shareFunction} src={share} alt='share meet' /></div>}
         </Outer>
     )
 
@@ -46,13 +46,15 @@ const Outer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 2.3rem 1rem 1rem 1rem;
+    img {
+        cursor: pointer;
+    }
 
     > div:last-child {
-        align-items: center;
-        cursor: pointer;
+        align-self: center;
         grid-column: 3 / 4;
         justify-self: end;
-        padding-right: 20px;
+        padding-right: 20px; 
     }
 `
 
@@ -64,8 +66,7 @@ const Logo = styled.h1`
 
 const BackArrow = styled.div`
     grid-column: 1 / 2;
-    align-items: center;
-    cursor: pointer;
+    align-self: center;
     padding-left: 20px;
 `
 

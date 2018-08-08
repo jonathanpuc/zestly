@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="13px" viewBox="0 0 18 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>CF55C427-945F-4405-B173-83A006E1CF90</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M15.3280885,0.167999344 C15.3984008,0.0976870116 15.4921507,0.0625308454 15.6093378,0.0625308454 C15.7265248,0.0625308454 15.8319933,0.0976870116 15.9257433,0.167999344 L16.9101159,1.18752816 C17.0038659,1.2578405 17.0507406,1.35159045 17.0507406,1.46877749 C17.0507406,1.58596453 17.0038659,1.69143303 16.9101159,1.78518299 L6.36326608,12.3320328 C6.29295375,12.4023452 6.19920379,12.4375013 6.08201675,12.4375013 C5.96482971,12.4375013 5.85936121,12.4023452 5.76561125,12.3320328 L1.08984115,7.62110657 C0.996091196,7.55079424 0.949216487,7.45704429 0.949216487,7.33985724 C0.949216487,7.2226702 0.996091196,7.1172017 1.08984115,7.02345175 L2.0742138,6.0390791 C2.16796376,5.94532914 2.27343226,5.89845443 2.3906193,5.89845443 C2.50780634,5.89845443 2.6015563,5.94532914 2.67186863,6.0390791 L6.08201675,9.44922722 L15.3280885,0.167999344 Z" id="path-1"></path>
+    </defs>
+    <g id="Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Typography" transform="translate(-687.000000, -2058.000000)">
+            <g id="Icons-/-Check" transform="translate(684.000000, 2052.000000)">
+                <g id="baseline-directions-24px">
+                    <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                </g>
+                <g id="-Colours-/-shades-/-Grey" transform="translate(3.000000, 6.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#5A4DB2" xlink:href="#path-1"></use>
+                    <g id="-Colours-/-shades-/-68" mask="url(#mask-2)" fill="#ACACAC">
+                        <g transform="translate(-3.000000, -6.000000)" id="Rectangle-2-Copy-5">
+                            <rect x="0" y="0" width="24" height="24" rx="4"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

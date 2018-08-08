@@ -119,13 +119,13 @@ const MainContent = styled.div`
 `
 
 const SectionButton = styled(ButtonStyle) `
-           height: 3.2rem;	
-                width: 13rem;	
-                border-radius: 4px;	
-                color: ${props => props.theme.grey};
-                letter-spacing: .5px;
-                border: 1px solid ${props => props.theme.grey};
-                margin: 2.2rem auto 2.2rem auto;
+        height: 3.2rem;	
+        width: 13rem;	
+        border-radius: 4px;	
+        color: ${props => props.theme.grey};
+        letter-spacing: .5px;
+        border: 1px solid ${props => props.theme.grey};
+        margin: 2.2rem auto 2.2rem auto;
 `
 
 const Sticky = styled.div`
