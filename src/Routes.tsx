@@ -5,6 +5,7 @@ import Login from './containers/login'
 import Meets from './containers/meets'
 import Dashboard from './containers/dashboard'
 import Meet from './containers/meets/Page'
+import Settings from './containers/settings'
 // import Navigation from './components/general/Navigation'
 // import Home from "./containers/Home";
 // import Notes from "./containers/Notes";
@@ -61,7 +62,7 @@ const Routes = ({ authenticated }: { authenticated: boolean }) => (
     <Switch>
         <UnauthenticatedRoute path="/" exact={true} component={Login} authenticated={authenticated} />
         <AuthenticatedRoute path="/home" exact={false} component={Dashboard} authenticated={authenticated} />
-
+        <AuthenticatedRoute path="/settings" exact={false} component={Settings} authenticated={authenticated} />
         <AuthenticatedRoute path="/onboarding" exact={false} component={Onboarding} authenticated={authenticated} />
         <AuthenticatedRoute path="/meets" exact={false} component={Meets} authenticated={authenticated} />
         <AuthenticatedRoute path="/meet" exact={false} component={Meet} authenticated={authenticated} />

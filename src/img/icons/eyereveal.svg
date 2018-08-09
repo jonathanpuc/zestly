@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="13px" viewBox="0 0 18 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>0369C9E4-6078-4B9F-A3EE-0474CB5EE39C</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M9,0 C4.90909091,0 1.41545455,2.69533333 0,6.5 C1.41545455,10.3046667 4.90909091,13 9,13 C13.0909091,13 16.5845455,10.3046667 18,6.5 C16.5845455,2.69533333 13.0909091,0 9,0 Z M9,10.8333333 C6.74181818,10.8333333 4.90909091,8.892 4.90909091,6.5 C4.90909091,4.108 6.74181818,2.16666667 9,2.16666667 C11.2581818,2.16666667 13.0909091,4.108 13.0909091,6.5 C13.0909091,8.892 11.2581818,10.8333333 9,10.8333333 Z M9,3.9 C7.64181818,3.9 6.54545455,5.06133333 6.54545455,6.5 C6.54545455,7.93866667 7.64181818,9.1 9,9.1 C10.3581818,9.1 11.4545455,7.93866667 11.4545455,6.5 C11.4545455,5.06133333 10.3581818,3.9 9,3.9 Z" id="path-1"></path>
+    </defs>
+    <g id="Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Typography" transform="translate(-255.000000, -2105.000000)">
+            <g id="Icons-/-Visible" transform="translate(252.000000, 2100.000000)">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                <g id="round-visibility-24px" stroke-width="1" fill-rule="evenodd" transform="translate(2.000000, 2.000000)">
+                    <g id="Bounding_Boxes">
+                        <polygon id="Shape" points="0 0 20 0 20 20 0 20"></polygon>
+                    </g>
+                    <g id="Rounded" transform="translate(1.000000, 3.000000)">
+                        <g id="-Colours-/-shades-/-Grey">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                            <g id="-Colours-/-shades-/-68" mask="url(#mask-2)" fill="#ACACAC">
+                                <g transform="translate(-3.000000, -5.000000)" id="Rectangle-2-Copy-5">
+                                    <rect x="0" y="0" width="24" height="24" rx="4"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
