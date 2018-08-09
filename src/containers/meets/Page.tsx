@@ -8,8 +8,27 @@ import tick from '../../img/icons/tick.svg'
 import ButtonStyle from '../../components/styles/Button'
 import message from '../../img/icons/message.svg'
 import directions from '../../img/icons/directions.svg'
-export default class MeetPage extends React.Component<{}, {}> {
+import edit from '../../img/icons/edit.svg'
+interface IMeetPageState {
+    meetCreator: boolean
+}
+export default class MeetPage extends React.Component<{}, IMeetPageState> {
 
+
+    public state = {
+        meetCreator: false
+    }
+
+    public componentDidMount() {
+
+        /**
+         * if (meets creatorUuid matches current users uuid) {
+         *      this.setState({ meetCreator: true})
+         * }
+         * 
+         */
+
+    }
     public render() {
 
         const slideSettings = {
@@ -54,6 +73,8 @@ export default class MeetPage extends React.Component<{}, {}> {
         }
 
         const AttendingPerson = () => <PersonIcon> <img src="http://www.fillmurray.com/600/600" alt="bill murrary" /><p>Bill</p></PersonIcon>
+
+        const { meetCreator } = this.state
         return (
             <div>
                 <Header>
@@ -115,7 +136,10 @@ export default class MeetPage extends React.Component<{}, {}> {
                 </MeetDetails>
                 <StickyFooter>
                     <p>Tuesday <span>7:30 PM</span></p>
-                    <StickyButton>Join feast</StickyButton>
+                    <StickyButton meetCreator={meetCreator}>
+                        {meetCreator && <img src={edit} alt='edit feast' />}
+                        {meetCreator ? 'Edit feast' : 'Join feast'}
+                    </StickyButton>
                 </StickyFooter>
             </div>
         )
@@ -251,8 +275,13 @@ const StickyFooter = styled.div`
 const StickyButton = ButtonStyle.extend`
     height: 4.8rem;	
     width: 17rem;
-    background-color: ${props => props.theme.purple};
+    background-color: ${(props: any) => props.meetCreator ? props.theme.green : props.theme.purple};
     color: #fff;
+    display: flex;
+    justify-content: center;
+    img {
+        margin-right: 11px;
+    }
 `
 
 const LocationDetails = styled.div`
