@@ -32,7 +32,7 @@ const AuthenticatedRoute = ({ component: Component, authenticated, ...rest }: IA
             authenticated
                 ? <Component />
                 : <Redirect
-                    to='/login'
+                    to='/'
                 />}
     />;
 
@@ -44,7 +44,7 @@ const UnauthenticatedRoute = ({ component: Component, authenticated, ...rest }: 
             !authenticated
                 ? <Component />
                 : <Redirect
-                    to='/'
+                    to='/home'
                 />}
     />
 
@@ -59,8 +59,9 @@ const NotFound = () => (
 const Routes = ({ authenticated }: { authenticated: boolean }) => (
 
     <Switch>
+        <UnauthenticatedRoute path="/" exact={true} component={Login} authenticated={authenticated} />
         <AuthenticatedRoute path="/home" exact={false} component={Dashboard} authenticated={authenticated} />
-        <UnauthenticatedRoute path="/login" exact={false} component={Login} authenticated={authenticated} />
+
         <AuthenticatedRoute path="/onboarding" exact={false} component={Onboarding} authenticated={authenticated} />
         <AuthenticatedRoute path="/meets" exact={false} component={Meets} authenticated={authenticated} />
         <AuthenticatedRoute path="/meet" exact={false} component={Meet} authenticated={authenticated} />

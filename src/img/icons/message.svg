@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>19C97EC7-AAFE-411F-9749-0ED7C778196E</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M7.87498122,0.375034869 C9.28122787,0.375034869 10.582006,0.703158908 11.7773157,1.35940752 C12.9726253,2.01565614 13.9218418,2.90041929 14.6249651,4.01369807 C15.3280885,5.12697684 15.6796501,6.33986458 15.6796501,7.65236127 C15.6796501,9.24610729 15.1757452,10.6757916 14.167935,11.9414135 C13.230437,13.1601608 11.9882527,14.0273459 10.4413814,14.5429698 C8.87107242,15.0585938 7.26560786,15.09375 5.62498659,14.6484383 L2.98827413,16.1249973 L2.98827413,13.3476602 C1.6054651,12.2929752 0.714841867,11.0039156 0.316405496,9.48048191 C-0.0585937891,8.07423526 0.0175780831,6.66212908 0.544920576,5.24416388 C1.07226307,3.82619869 1.96874531,2.67190421 3.23436729,1.78128152 C4.5703016,0.843783572 6.11717292,0.375034869 7.87498122,0.375034869 Z M8.68357305,10.1484491 L12.9726253,5.6484598 L9.07029087,7.79298593 L7.0663894,5.68361596 L2.81249329,10.2187614 L6.67967157,8.0390791 L8.68357305,10.1484491 Z" id="path-1"></path>
+    </defs>
+    <g id="Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Typography" transform="translate(-634.000000, -2104.000000)">
+            <g id="Icons-/-Messenger" transform="translate(630.000000, 2100.000000)">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                <g id="-Colours-/-shades-/-Grey" stroke-width="1" fill-rule="evenodd" transform="translate(4.000000, 4.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#5A4DB2" xlink:href="#path-1"></use>
+                    <g id="-Colours-/-shades-/-68" mask="url(#mask-2)" fill="#ACACAC">
+                        <g transform="translate(-2.000000, -4.000000)" id="Rectangle-2-Copy-5">
+                            <rect x="0" y="0" width="24" height="24" rx="4"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

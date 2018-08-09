@@ -5,7 +5,9 @@ import cutlery from '../../img/icons/cutlery.svg'
 import pin from '../../img/icons/pin.svg'
 import Slider from '../../components/general/Slider'
 import tick from '../../img/icons/tick.svg'
-
+import ButtonStyle from '../../components/styles/Button'
+import message from '../../img/icons/message.svg'
+import directions from '../../img/icons/directions.svg'
 export default class MeetPage extends React.Component<{}, {}> {
 
     public render() {
@@ -59,13 +61,13 @@ export default class MeetPage extends React.Component<{}, {}> {
                 </Header>
                 <MeetDetails>
                     <VenueDetails><h2>Vegie Bar</h2> <div><img src={cutlery} alt="fork and knife" /><p>Modern European</p></div></VenueDetails>
-                    <LocationDetails>
+                    <AddressDetails>
                         <img src={pin} alt="location" />
                         <div>
                             <h3>Fitzroy, 175 Brunswick Street</h3>
                             <p>4km away</p>
                         </div>
-                    </LocationDetails>
+                    </AddressDetails>
                     <AttendeeDetails>
                         <p>Already attending</p>
                         <Slider settings={slideSettings}>
@@ -103,7 +105,18 @@ export default class MeetPage extends React.Component<{}, {}> {
                             </li>
                         </AvailabilityList>
                     </VenueDescription>
+                    <LocationDetails>
+                        <div>Map goes here</div>
+                        <div>
+                            <div><img src={message} alt="phone number" /> <p>(03) 9939 3293</p></div>
+                            <div><img src={directions} alt="get directions" /><p>Directions</p> </div>
+                        </div>
+                    </LocationDetails>
                 </MeetDetails>
+                <StickyFooter>
+                    <p>Tuesday <span>7:30 PM</span></p>
+                    <StickyButton>Join feast</StickyButton>
+                </StickyFooter>
             </div>
         )
     }
@@ -116,7 +129,7 @@ const Header = styled.header`
     height: 40vh;
 `
 
-const LocationDetails = styled.div`
+const AddressDetails = styled.div`
     display: flex;
     align-items: flex-start;
     background-color: #FAFAFA;
@@ -207,6 +220,69 @@ const AvailabilityList = styled.ul`
             height: 15px;
             width: 15px;
             margin: 1px 10px 0px 0px;
+        }
+    }
+`
+
+const StickyFooter = styled.div`
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 13px;
+    align-items: center;
+
+    p {
+        color: ${props => props.theme.purple};
+        font-weight: 1.4rem;
+        display: flex;
+        flex-direction: column;
+
+        span {
+            font-size: 2.4rem;
+            font-weight: 500;
+            margin-top: 3px;
+        }
+    }
+`
+
+const StickyButton = ButtonStyle.extend`
+    height: 4.8rem;	
+    width: 17rem;
+    background-color: ${props => props.theme.purple};
+    color: #fff;
+`
+
+const LocationDetails = styled.div`
+    padding: 16px 10px 10rem 10px;
+    > div:first-child {
+        height: 16.8rem;	
+        width: 35rem;
+        margin: 0 auto;
+        background-color: ${props => props.theme.greenFaded};
+    }
+
+    > div:last-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin: 0 auto;
+    color: ${props => props.theme.purple};
+        > div:first-child {
+            p {
+                font-size: 14px;
+            }
+        }
+        div {
+            display: flex;
+
+            img {
+                height: 17px;
+                width: 17px;
+                margin: 0px 8px 0px 0px;
+            }
         }
     }
 `
