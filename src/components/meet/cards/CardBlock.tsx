@@ -28,7 +28,7 @@ const CardOuter = styled.div`
     height: 22rem;
     width: 23rem;
     border-radius: 6px;
-    box-shadow: 0 2px 14px 0 rgba(0,0,0,0.18), 0 2px 4px 0 rgba(0,0,0,0.15);
+    border: 1px solid ${props => props.theme.offwhite};
 `
 
 const CardPhoto = styled.div`
