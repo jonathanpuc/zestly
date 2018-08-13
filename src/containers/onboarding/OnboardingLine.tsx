@@ -66,6 +66,7 @@ const Input = styled.input`
     color: ${props => props.theme.green};
     margin: 0 1rem;
     border: none;
+    background-color: ${props => props.theme['97shade']};
     border-bottom: 2px solid ${props => props.theme.offwhite};
     transition: all 0.8s ease;
     &:focus {

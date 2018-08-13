@@ -19,11 +19,10 @@ class Searchbar extends React.Component<{}, ISearchBarState> {
     public render() {
         return (
             <Outer query={this.state.query}>
-                {this.state.query && <Label>Search:</Label>}
                 <input
                     onChange={this.handleChange}
                     type="text"
-                    placeholder="Search meets" />
+                    placeholder="Find a feast" />
                 <Icon>{this.state.query ? <img src={cross} alt="clear search" /> : <img src={magnify} alt="search" />}</Icon>
             </Outer>
         )
@@ -32,13 +31,11 @@ class Searchbar extends React.Component<{}, ISearchBarState> {
 
 const Icon = styled.span``
 
-const Label = styled.span`
-`
-
 const Outer = styled.div`
-    font-size: 1.6px;
+    font-size: 1.8px;
     width: 35rem;
-    height: 4.8rem;
+    background-color: #fff;
+    height: 6.4rem;
     margin: 0 auto;
     border-radius: 4px;
     border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
@@ -50,13 +47,12 @@ const Outer = styled.div`
     position: relative;
     transition: all 0.5s linear;
       input {
-        color: ${(props: any) => props.query && props.theme.green};
-        font-weight: ${(props: any) => props.query ? 'bold' : '300'};
+        color: ${(props: any) => props.query && props.theme.purple};
         font-family: inherit;
         font-size: 1.8rem;
-        height: 4.8rem;
+        height: 6.4rem;
         transition: border 0.5s linear;
-
+        font-weight: 300;
         border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
         border: 1px solid ${props => props.query ? props.theme.purple : '#F0F0F0'};
         border-left: none;
@@ -75,14 +71,6 @@ const Outer = styled.div`
         font-size: 1.6rem;
         justify-self: flex-end;
         margin-right: 1.6rem;
-    }
-    ${Label} {
-        font-size: 1.6rem;
-        display: inline-block;
-        display: ${(props: any) => props.query ? 'block' : 'none'};
-        margin-right: 5px;
-        color: #ACACAC;
-        margin-bottom: -2px;
     }
 `
 

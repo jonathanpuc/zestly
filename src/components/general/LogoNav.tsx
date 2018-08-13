@@ -7,7 +7,8 @@ import share from '../../img/icons/share.svg'
 interface IProps extends RouteComponentProps<{}> {
     backPage: boolean,
     onBackClick?: () => void,
-    shareButton?: boolean
+    shareButton?: boolean,
+    fill?: boolean
 }
 
 const LogoNav: React.SFC<IProps> = (props) => {
@@ -26,7 +27,7 @@ const LogoNav: React.SFC<IProps> = (props) => {
     }
 
     return (
-        <Outer>
+        <Outer fill={props.fill}>
             {
                 props.backPage && (
                     <BackArrow ><img onClick={handleBackClick} src={arrowLeft} alt="go back" /></BackArrow>
@@ -46,6 +47,7 @@ const Outer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 2.3rem 1rem 1rem 1rem;
+    background-color: ${(props: any) => props.fill ? '#fff' : 'inherit'};
     img {
         cursor: pointer;
     }

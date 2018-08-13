@@ -90,41 +90,48 @@ export default class MeetPage extends React.Component<{}, IMeetPageState> {
                         </div>
                     </AddressDetails>
                     <AttendeeDetails>
-                        <p>Already attending</p>
-                        <Slider settings={slideSettings}>
-                            {AttendingPerson()}
-                            {AttendingPerson()}
-                            {AttendingPerson()}
-                            {AttendingPerson()}
-                        </Slider>
+                        <Label><h4>Already attending</h4></Label>
+                        <Content>
+                            <Slider settings={slideSettings}>
+                                {AttendingPerson()}
+                                {AttendingPerson()}
+                                {AttendingPerson()}
+                                {AttendingPerson()}
+                            </Slider>
+                        </Content>
+
                     </AttendeeDetails>
                     <VenueDescription>
-                        <KnowLabel>
-                            Known for
-                            </KnowLabel>
-                        <p>Vegan bar and eatery with a rock 'n' roll vibe focusing on Latin-inspired food.</p>
+                        <Label>
+                            <h4>Known for</h4>
+                        </Label>
+                        <Content>
+                            <p>Vegan bar and eatery with a rock 'n' roll vibe focusing on Latin-inspired food.</p>
+                        </Content>
                     </VenueDescription>
                     <VenueDescription>
-                        <KnowLabel>
-                            Know more
-                            </KnowLabel>
-                        <AvailabilityList>
-                            <li>
-                                <img src={tick} alt='available' /> Full Bar available
+                        <Label>
+                            <h4>Know more</h4>
+                        </Label>
+                        <Content>
+                            <AvailabilityList>
+                                <li>
+                                    <img src={tick} alt='available' /> Full Bar available
                             </li>
-                            <li>
-                                <img src={tick} alt='available' /> Vegetarian Friendly
+                                <li>
+                                    <img src={tick} alt='available' /> Vegetarian Friendly
                             </li>
-                            <li>
-                                <img src={tick} alt='available' /> Gluten Free Options
+                                <li>
+                                    <img src={tick} alt='available' /> Gluten Free Options
                             </li>
-                            <li>
-                                <img src={tick} alt='available' /> Dairy Free
+                                <li>
+                                    <img src={tick} alt='available' /> Dairy Free
                             </li>
-                            <li>
-                                <img src={tick} alt='available' /> Vegan Options
+                                <li>
+                                    <img src={tick} alt='available' /> Vegan Options
                             </li>
-                        </AvailabilityList>
+                            </AvailabilityList>
+                        </Content>
                     </VenueDescription>
                     <LocationDetails>
                         <div>Map goes here</div>
@@ -153,12 +160,16 @@ const Header = styled.header`
     height: 40vh;
 `
 
+const Content = styled.div`
+    padding: 16px;
+`
+
 const AddressDetails = styled.div`
     display: flex;
     align-items: flex-start;
-    background-color: #FAFAFA;
+    background-color: #fff;
     padding: 16px;
-    border-bottom: 1px solid #F0F0F0;
+    border-bottom: 6px solid ${props => props.theme['97shade']};
     h3 {
         color: ${props => props.theme.offblack};
         font-weight: 500;
@@ -176,6 +187,7 @@ const VenueDetails = styled.div`
     color: ${props => props.theme.purple};
     background-color: #fff;
     padding: 25px 0px 18px 28px;
+    border-bottom: 2px solid ${props => props.theme['97shade']};
     > div {
         display: flex;
         p {
@@ -198,8 +210,8 @@ const MeetDetails = styled.section`
 `
 
 const AttendeeDetails = styled.div`
-    padding: 16px 16px 5px 16px;
-    border-bottom: 1px solid #F0F0F0;
+    border-bottom: 5px solid ${props => props.theme['97shade']};
+    background-color: #fff;
     > p:first-child {
         color: ${props => props.theme.purple};
         font-size: 1.2rem;
@@ -226,16 +238,23 @@ const PersonIcon = styled.div`
 `
 
 const VenueDescription = styled.div`
-    padding: 16px;
+    background-color: #fff;
     color: ${props => props.theme.offblack};
     border-bottom: 1px solid #F0F0F0;
+    &:not(:last-child) {
+        border-bottom: 6px solid ${props => props.theme['97shade']};
+    }
 `
 
-const KnowLabel = styled.h4`
-	font-size: 14px;
+const Label = styled.div`
+    border-bottom: 1px solid ${props => props.theme['97shade']};
+    h4 {
+    font-size: 14px;
     font-weight: 300;
-    margin-bottom: 7.5px;
-    color: ${props => props.theme.purple};
+
+    padding: 10px 16px;
+    color: ${props => props.theme.offblack};
+    }
 `
 const AvailabilityList = styled.ul`
     li {
@@ -257,9 +276,9 @@ const StickyFooter = styled.div`
     justify-content: space-around;
     padding: 13px;
     align-items: center;
-
+    border: 1px solid ${props => props.theme.offwhite};
     p {
-        color: ${props => props.theme.purple};
+        color: ${props => props.theme.blue};
         font-weight: 1.4rem;
         display: flex;
         flex-direction: column;
@@ -285,6 +304,7 @@ const StickyButton = ButtonStyle.extend`
 `
 
 const LocationDetails = styled.div`
+    background-color: #fff;
     padding: 16px 10px 10rem 10px;
     > div:first-child {
         height: 16.8rem;	
@@ -298,7 +318,7 @@ const LocationDetails = styled.div`
     justify-content: space-between;
     padding: 15px;
     margin: 0 auto;
-    color: ${props => props.theme.purple};
+    color: ${props => props.theme.blue};
         > div:first-child {
             p {
                 font-size: 14px;

@@ -11,8 +11,10 @@ export default class Meets extends React.Component<IMeetsProps, {}> {
     public render() {
         return (
             <div>
-                <LogoNav backPage={true} />
-                <Search />
+                <Header>
+                    <LogoNav backPage={true} />
+                    <Search />
+                </Header>
                 <MeetsSection>
                     <h2>Meets happening soon.</h2>
                     <MeetsList heading='Meets happening soon' />
@@ -23,12 +25,19 @@ export default class Meets extends React.Component<IMeetsProps, {}> {
 
 }
 
+const Header = styled.div`
+    background-color: #fff;
+    border-bottom: 1px solid #E6E6E6;
+    padding-bottom: 10px;
+`
+
 const MeetsSection = styled.section`
     max-width: 95%;
     margin: 45px auto;
-        h2 {
+    h2 {
         color: ${props => props.theme.grey};
-        font-weight: 500;
-        margin-bottom: 20px;
+        font-weight: 300;
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
     }
 `

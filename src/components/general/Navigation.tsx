@@ -112,21 +112,16 @@ export default class extends React.Component<{}, INavigationState> {
 
     public render() {
         return (
-            <Outer>
-                <Nav viewing={this.state.viewing} styles={this.state.styles}>
-                    <ProfileIcon ><img onClick={this.onProfileSelected} src={profile} alt="profile" /></ProfileIcon>
-                    <LogoIcon onClick={this.onLogoSelected}><h1><img src={logo} alt="zestly" /></h1></LogoIcon>
-                    <MessagesIcon ><img src={chat} onClick={this.onMessageSelected} alt="messages" /></MessagesIcon>
-                </Nav>
-            </Outer>
+
+            <Nav viewing={this.state.viewing} styles={this.state.styles}>
+                <ProfileIcon ><img onClick={this.onProfileSelected} src={profile} alt="profile" /></ProfileIcon>
+                <LogoIcon onClick={this.onLogoSelected}><h1><img src={logo} alt="zestly" /></h1></LogoIcon>
+                <MessagesIcon ><img src={chat} onClick={this.onMessageSelected} alt="messages" /></MessagesIcon>
+            </Nav>
+
         )
     }
 }
-
-const Outer = styled.div`
-    margin-top: 1rem;
-`
-
 const ProfileIcon = styled.div`
     font-size: 2rem;
     color: ${props => props.theme.purple};

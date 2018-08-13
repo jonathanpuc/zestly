@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components'
-import Button from '../../components/general/Button'
+import ButtonStyle from '../../components/styles/Button'
 import OnboardingLine from './OnboardingLine'
 import SmallButton from '../../components/general/SmallButton'
 import ProfilePhotoGrid from '../../components/profile/ProfilePhotoGrid'
@@ -129,16 +129,23 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
 
         return (
             <MainOuter>
-                <LogoNav backPage={this.state.showing !== 'first'} onBackClick={this.goBackStep} />
-                <Description>{descriptionTitle[this.state.showing]}</Description>
+                <Header>
+                    <LogoNav backPage={this.state.showing !== 'first'} onBackClick={this.goBackStep} fill={true} />
+                    <Description>
+                        {descriptionTitle[this.state.showing]}
+                    </Description>
+                </Header>
+
+
                 {
                     this.state.showing === 'first' ?
                         renderProfileDetails()
                         : this.state.showing === 'second' ? renderPhotoDetails() : renderLocationDetails()
                 }
-                <ButtonWrapper>
-                    <Button filled={true} onClick={this.nextDetails} disabled={!this.validateStep()}>Next</Button>
-                </ButtonWrapper>
+
+                <Footer>
+                    <Button onClick={this.nextDetails} disabled={!this.validateStep()}>Continue</Button>
+                </Footer>
             </MainOuter>
         )
     }
@@ -149,19 +156,40 @@ const MainOuter = styled.div`
     flex-direction: column;
 `
 
-const ButtonWrapper = styled.div`
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
+const Header = styled.div`
+    background-color: #fff;
+    margin-bottom: 3rem;
+    padding-bottom: 30px;
 `
 
-const Description = styled.p`
-    color: ${props => props.theme.grey};
+const Footer = styled.div`
+    position: fixed;
+    bottom: 0;
+    height: 58px;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-end;
+`
+const Button = ButtonStyle.extend`
+    margin-right: 26px;
+    color: ${props => props.theme.offblack};
+    font-size: 18px;
+    &:focus {
+        box-shadow: none;
+    }
+    &:disabled {
+        color: ${props => props.theme.offwhite};
+    }
+`
 
+
+const Description = styled.div`
+    color: ${props => props.theme.offblack};
+    background-color: #fff;
     width: 80%;
-    margin: 30px auto 20px auto;
+    margin: 0 auto;
     text-align: left;
-
 `
 const FillerLine = styled.p`
     color: ${props => props.theme.blue};

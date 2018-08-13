@@ -55,10 +55,13 @@ export default class Home extends React.Component<{}, IHomeState> {
 
         return (
             <div>
-                <Search />
+                <Header>
+                    <Search />
+                </Header>
+
                 <MainContent>
                     <section>
-                        <h2>So close I can taste it!</h2>
+                        <h2>Feasts happening soon!</h2>
                         <Slider>
                             <CardBlock />
                             <CardBlock />
@@ -74,7 +77,7 @@ export default class Home extends React.Component<{}, IHomeState> {
                     </div>
 
                     <section>
-                        <h2>What are you waiting for?</h2>
+                        <h2>Upcoming feasts.</h2>
 
                         <Slider settings={largeCardSliderSettings}>
                             <CardLarge />
@@ -95,13 +98,19 @@ export default class Home extends React.Component<{}, IHomeState> {
     }
 }
 
+const Header = styled.div`
+    background-color: #fff;
+    border-bottom: 1px solid #E6E6E6;
+    padding: 13px 0 10px 0;;
+`
 const MainContent = styled.div`
     padding-bottom: 5rem;
 
 
     h2 {
         color: ${props => props.theme.grey};
-        font-weight: 400;
+        font-weight: 300;
+        font-size: 1.8rem;
     }
 
     > div:nth-child(2) {
@@ -136,11 +145,8 @@ const Sticky = styled.div`
     justify-content: center;
     align-items: flex-end;
     width: 100%;
-    background-image: -webkit-repeating-linear-gradient( bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    background-image: -moz-repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    background-image: -ms-repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    background-image: -o-repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    background-image: repeating-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    background-color: #fff;
+    border: 1px solid ${props => props.theme.offwhite};
     button {
         margin-bottom: 1.5rem;
         border: none;
