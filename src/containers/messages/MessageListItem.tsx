@@ -6,7 +6,9 @@ const MessageListItem: React.SFC<{}> = () => {
             <PersonIcon> <img src="http://www.fillmurray.com/600/600" alt="bill murrary" /></PersonIcon>
             <div>
                 <p>Amanda</p>
-                <p>Lorem ipsum dolor sit amet conseasdasdqweqweqwe</p>
+                <div>
+                    <p>Lorem ipsum dolor sit amet conseasdasdqweqweqwe</p>
+                </div>
             </div>
         </Outer>
     )
@@ -22,12 +24,20 @@ const Outer = styled.div`
     border-bottom: 2px solid ${props => props.theme['97shade']};
 
     > div:last-child {
+
+            max-width: 70%;
         p:first-child {
             font-weight: 500;
             color: ${props => props.theme.purple};
         }
-        p:last-child {
-            color: ${props => props.theme.blue};
+
+        div {
+            p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 100%;
+            }
         }
     }
 `
