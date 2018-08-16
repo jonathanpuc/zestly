@@ -26,7 +26,7 @@ const Outer = styled.div`
     > div:last-child {
 
             max-width: 70%;
-        p:first-child {
+        > p:first-child {
             font-weight: 500;
             color: ${props => props.theme.purple};
         }
@@ -37,6 +37,7 @@ const Outer = styled.div`
                 white-space: nowrap;
                 overflow: hidden;
                 max-width: 100%;
+                color: #B3B3B3
             }
         }
     }

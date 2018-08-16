@@ -96,7 +96,7 @@ const GroupDetails = styled.div`
     }
 
     > p:last-child {
-        color: ${props => props.theme.grey};
+        color: #B3B3B3;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;

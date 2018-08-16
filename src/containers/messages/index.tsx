@@ -4,7 +4,19 @@ import Slider from '../../components/general/Slider'
 import MessageListItem from './MessageListItem'
 import FeastGroup from './FeastGroup'
 
-export default class Messages extends React.Component<{}, {}> {
+interface IState {
+    showing: string
+}
+
+export default class Messages extends React.Component<IState, {}> {
+
+    public state = {
+        showing: 'messages'
+    }
+
+    public toggleTab = () => {
+        this.setState({ showing: this.state.showing === 'messages' ? 'feasts' : 'messages' })
+    }
 
     public render() {
 
@@ -55,11 +67,11 @@ export default class Messages extends React.Component<{}, {}> {
 
         return (
             <div>
-                <Tabs>
-                    <div>
+                <Tabs showing={this.state.showing}>
+                    <div onClick={this.toggleTab}>
                         Feasts
                 </div>
-                    <div>
+                    <div onClick={this.toggleTab}>
                         Messages
                 </div>
                 </Tabs>
@@ -123,13 +135,25 @@ const Tabs = styled.div`
     grid-template-columns: repeat(2, 1fr);
     background-color: #fff;
     margin: 2px 0px 4px 0px;
-    color: ${props => props.theme.purple};
+
     div {
         height: 4.8rem;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s linear;
+    }
+
+    div:first-child {
+        color: ${(props: any) => props.showing === 'feasts' ? props.theme.purple : props.theme.grey};
+        border-bottom: 1px solid ${(props: any) => props.showing === 'feasts' ? props.theme.purple : props.theme.offwhite};
+    }
+
+    div:last-child {
+        color: ${(props: any) => props.showing === 'messages' ? props.theme.purple : props.theme.grey};
+        border-bottom: 1px solid ${(props: any) => props.showing === 'messages' ? props.theme.purple : props.theme.offwhite};
     }
 `
 
