@@ -91,9 +91,7 @@ export default class Messages extends React.Component<{}, {}> {
 
                     <SectionBody>
                         <div>
-                            <Slider settings={slideSettings}>
-                                <FeastGroup />
-                            </Slider>
+                            <FeastGroup />
                         </div>
                     </SectionBody>
                 </Section>

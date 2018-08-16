@@ -14,7 +14,11 @@ const FeastGroup: React.SFC<{}> = () => {
                 </div>
 
             </AttendeesBlock>
-
+            <GroupDetails>
+                <p><span>Today </span>7:30PM</p>
+                <p>Smith &amp; Daughters</p>
+                <p>Amanda: Lorem ipsum dolor sit amet consectetur  Lorem ipsum dolor sit amet consectetur</p>
+            </GroupDetails>
         </Outer>
     )
 }
@@ -22,24 +26,27 @@ const FeastGroup: React.SFC<{}> = () => {
 export default FeastGroup
 
 const Outer = styled.div`
- 
+    display: flex;
+    justify-content: flex-start;
 `
 
 const AttendeesBlock = styled.div`
+    position: relative;
+    margin-right: 10px;
     > img:first-child {
         height: 76px;	
         width: 76px;
         border-radius: 50%;
     }
     > div {
-        position: absolute;
         bottom: -5px;
+        position: absolute;
+        width: 82px;
         img {
         height: 26px;	
         width: 26px;
         border-radius: 50%;
         border: 2px solid #FFFFFF;
-        position: relative;
         }
 
         img:first-child {
@@ -61,11 +68,39 @@ const AttendeesBlock = styled.div`
             display: block;
             position: absolute;
             bottom: 0;
-            right: -13px;
+            right: 8px;
         }
     }
+`
 
+const GroupDetails = styled.div`
+    display: inline-flex;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 70%;
+    justify-content: center;
+    > p:first-child {
+            font-size: 1.4rem;
 
+            span {
+                color: ${props => props.theme.red};
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+    }
 
+    > p:nth-child(2) {
+        font-size: 1.8rem;
+        color: ${props => props.theme.purple};
+        font-weight: 400;
+    }
+
+    > p:last-child {
+        color: ${props => props.theme.grey};
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 100%;
+    }
 `
 

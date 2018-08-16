@@ -6,7 +6,7 @@ const MessageListItem: React.SFC<{}> = () => {
             <PersonIcon> <img src="http://www.fillmurray.com/600/600" alt="bill murrary" /></PersonIcon>
             <div>
                 <p>Amanda</p>
-                <p>Lorem ipsum dolor sit amet conse</p>
+                <p>Lorem ipsum dolor sit amet conseasdasdqweqweqwe</p>
             </div>
         </Outer>
     )
