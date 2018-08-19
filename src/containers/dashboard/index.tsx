@@ -23,12 +23,10 @@ class Dashboard extends React.Component<IProps, {}> {
             </div>
         )
 
-        const goMessages = () => this.props.history.push('/home/messages')
         return (
             <div>
                 <Header>
                     {/* if (!props.params.location.include('home')) dont show navigation */}
-                    <button onClick={goMessages}>Messages</button>
                     <Navigation />
                 </Header>
                 <Switch>

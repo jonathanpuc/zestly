@@ -195,7 +195,7 @@ const PersonIcon = styled.div`
     }
 
     p {
-        color: ${props => props.theme.purple};
+        color: ${props => props.theme.blue};
         font-weight: 500;
         margin-top: 8px;
     }

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import profile from '../../img/icons/profile.svg'
 import chat from '../../img/icons/chat.svg'
 import logo from '../../img/logo.svg'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 interface IStyles {
     left: string,
@@ -20,7 +21,11 @@ interface INavigationState {
     viewing: string
 }
 
-export default class extends React.Component<{}, INavigationState> {
+interface INavigationProps extends RouteComponentProps<{}> {
+
+}
+
+class Navigation extends React.Component<INavigationProps, INavigationState> {
     public state = {
         styles: {
             messages: {
@@ -43,71 +48,103 @@ export default class extends React.Component<{}, INavigationState> {
 
     }
 
-    public onProfileSelected = () => {
-        this.setState({
-            styles: {
-                profile: {
-                    left: '50%',
-                    right: '',
-                    translateX: '-50%'
-                },
-                logo: {
-                    left: 'initial',
-                    right: '0%',
-                    translateX: '2rem'
-                },
-                messages: {
-                    left: '',
-                    translateX: '4rem',
-                    right: '0%'
+    public componentDidMount() {
+        const path = this.props.location.pathname
+        if (path.includes('/home') && path.includes('/profile') || path.includes('messages')) {
+            const page = path.split('/')[2]
+            this.setStyle(page)
+        }
+    }
+
+    public getStylingState = (page: string) => {
+        switch (page) {
+            case 'profile':
+                return {
+                    styles: {
+                        profile: {
+                            left: '50%',
+                            right: '',
+                            translateX: '-50%'
+                        },
+                        logo: {
+                            left: 'initial',
+                            right: '0%',
+                            translateX: '2rem'
+                        },
+                        messages: {
+                            left: '',
+                            translateX: '4rem',
+                            right: '0%'
+                        }
+                    }
                 }
-            }
-        })
+
+            case 'index':
+                return {
+                    styles: {
+                        messages: {
+                            left: '',
+                            right: '0%',
+                            translateX: '0'
+                        },
+                        logo: {
+                            left: '50%',
+                            right: '',
+                            translateX: '-50%'
+                        },
+                        profile: {
+                            left: '0%',
+                            right: '',
+                            translateX: '0'
+                        }
+                    }
+                }
+
+            case 'messages':
+                return {
+                    styles: {
+                        profile: {
+                            left: '0%',
+                            right: 'initial',
+                            translateX: '-4rem'
+                        },
+                        logo: {
+                            left: '0%',
+                            right: 'initial',
+                            translateX: '-2rem'
+                        },
+                        messages: {
+                            left: '50%',
+                            right: 'initial',
+                            translateX: '-50%'
+                        }
+                    }
+                }
+
+            default:
+                return {}
+
+        }
+    }
+
+    public setStyle = (page: string) => {
+        const style = this.getStylingState(page)
+        this.setState({ ...this.state, ...style })
+    }
+
+    public onProfileSelected = () => {
+        this.setStyle('profile')
+        this.props.history.push('/home/profile')
     }
 
     public onLogoSelected = () => {
-        this.setState({
-            styles: {
-                messages: {
-                    left: '',
-                    right: '0%',
-                    translateX: '0'
-                },
-                logo: {
-                    left: '50%',
-                    right: '',
-                    translateX: '-50%'
-                },
-                profile: {
-                    left: '0%',
-                    right: '',
-                    translateX: '0'
-                }
-            }
-        })
+        this.setStyle('index')
+        this.props.history.push('/home')
     }
 
     public onMessageSelected = () => {
-        this.setState({
-            styles: {
-                profile: {
-                    left: '0%',
-                    right: 'initial',
-                    translateX: '-4rem'
-                },
-                logo: {
-                    left: '0%',
-                    right: 'initial',
-                    translateX: '-2rem'
-                },
-                messages: {
-                    left: '50%',
-                    right: 'initial',
-                    translateX: '-50%'
-                }
-            }
-        })
-
+        this.setStyle('messages')
+        this.props.history.push('/home/messages')
     }
 
     public render() {
@@ -122,6 +159,10 @@ export default class extends React.Component<{}, INavigationState> {
         )
     }
 }
+
+export default withRouter(Navigation)
+
+
 const ProfileIcon = styled.div`
     font-size: 2rem;
     color: ${props => props.theme.purple};

@@ -32,7 +32,7 @@ const Outer = styled.div`
 
 const AttendeesBlock = styled.div`
     position: relative;
-    margin-right: 10px;
+    margin-right: 20px;
     > img:first-child {
         height: 76px;	
         width: 76px;
@@ -68,7 +68,7 @@ const AttendeesBlock = styled.div`
             display: block;
             position: absolute;
             bottom: 0;
-            right: 8px;
+            right: -6px;
         }
     }
 `
@@ -91,7 +91,7 @@ const GroupDetails = styled.div`
 
     > p:nth-child(2) {
         font-size: 1.8rem;
-        color: ${props => props.theme.purple};
+        color: ${props => props.theme.blue};
         font-weight: 400;
     }
 
