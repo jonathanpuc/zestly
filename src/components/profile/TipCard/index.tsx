@@ -54,11 +54,11 @@ export default TipCard
 
 const Outer = styled.div`
     margin: 0 auto;
-	height: 14rem;
+	height: 16rem;
 	width: 33rem;
 	border-radius: 4px;
     background-color: #fff;
-
+    cursor: pointer;
     > div:first-child {
         padding: 12px 0px;
         width: 85%;
@@ -73,12 +73,12 @@ const Outer = styled.div`
     
     h4 {
         color: ${(props: any) => props.color};
-        font-size: 18px;
+        font-size: 1.8rem;
         font-weight: 500;
     }
 
     p {
-        width: 80%;
+        width: 85%;
         margin: 0 auto;
         color: ${props => props.theme.offblack};
     }

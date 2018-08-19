@@ -1,14 +1,25 @@
 import * as React from 'react';
 import styled from 'styled-components'
 import TipCard from '../../components/profile/TipCard'
-
+import Slider from '../../components/general/Slider'
 import pin from '../../img/icons/pin.svg'
 import editDot from '../../img/icons/editDot.svg'
 import cog from '../../img/icons/cog.svg'
 
 export default class Profile extends React.Component<{}, {}> {
 
+
+
     public render() {
+
+        const sliderSettings = {
+            infinite: false,
+            slidesToShow: 1,
+            initialSlide: 0,
+            adaptiveHeight: false,
+            dots: true
+        }
+
         return (
             <div>
                 <Main>
@@ -24,7 +35,15 @@ export default class Profile extends React.Component<{}, {}> {
                         <div><img src={cog} alt="account settings" />Settings</div>
                     </Tabs>
                 </Main>
-                <TipCard color='red' heading='Meet more people' copy='People feel more comfortable meeting others that have 3 or more pictures on their profile.' >Yellow</TipCard>
+                <TipsAndTricks>
+                    <p>Profile tips and tricks</p>
+                    <Slider settings={sliderSettings}>
+                        <TipCard color='green' heading='Meet more people' copy='People feel more comfortable meeting others that have 3 or more pictures on their profile.' />
+                        <TipCard color='purple' heading='Ice Ice baby' copy='Break the ice by giving everyone something to start conversations with by adding your "ask me" starter.' />
+                        <TipCard color='red' heading='So, what brings you here?' copy='People like to know what your intentions are. Let peopple know what brings you here on your profile.' />
+                    </Slider>
+                </TipsAndTricks>
+
             </div>
         )
     }
@@ -79,4 +98,16 @@ const Main = styled.div`
     }
 `
 
+const TipsAndTricks = styled.div`
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0px;
+    > p {
+
+	color: #8989B0;
+
+	font-size: 14px;
+
+    }
+`
 
