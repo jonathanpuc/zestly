@@ -1,5 +1,5 @@
 import * as React from 'react'
-import LogoNav from '../../components/general/LogoNav'
+import NavHeader from '../../components/general/NavHeader'
 import styled from 'styled-components'
 import copy from '../../img/icons/copy.svg'
 import eyehide from '../../img/icons/eyehide.svg'
@@ -81,7 +81,7 @@ class AccountSettings extends React.Component<IAccountSettingsProps, IAccountSet
 
         return (
             <div>
-                <LogoNav backPage={true} />
+                <NavHeader backPage={true} />
                 <Heading>Account settings</Heading>
                 <InputGroup>
                     <label htmlFor="feastsRange">

@@ -18,7 +18,7 @@ class Dashboard extends React.Component<IProps, {}> {
 
         const NotFound = () => (
             <div>
-                {/* logonav with back btn on click going to '/home' */}
+                {/* NavHeader with back btn on click going to '/home' */}
                 Not found
             </div>
         )

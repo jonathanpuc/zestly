@@ -4,7 +4,7 @@ import ButtonStyle from '../../components/styles/Button'
 import OnboardingLine from './OnboardingLine'
 import SmallButton from '../../components/general/SmallButton'
 import ProfilePhotoGrid from '../../components/profile/ProfilePhotoGrid'
-import LogoNav from '../../components/general/LogoNav'
+import NavHeader from '../../components/general/NavHeader'
 interface IOnboardingState {
     showing: string,
     name: string,
@@ -130,7 +130,7 @@ export default class Onboarding extends React.Component<{}, IOnboardingState> {
         return (
             <MainOuter>
                 <Header>
-                    <LogoNav backPage={this.state.showing !== 'first'} onBackClick={this.goBackStep} fill={true} />
+                    <NavHeader backPage={this.state.showing !== 'first'} onBackClick={this.goBackStep} fill={true} />
                     <Description>
                         {descriptionTitle[this.state.showing]}
                     </Description>

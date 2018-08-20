@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LogoNav from '../../components/general/LogoNav'
+import NavHeader from '../../components/general/NavHeader'
 import styled from 'styled-components'
 import cutlery from '../../img/icons/cutlery.svg'
 import pin from '../../img/icons/pin.svg'
@@ -28,6 +28,10 @@ export default class MeetPage extends React.Component<{}, IMeetPageState> {
          * 
          */
 
+    }
+
+    public handleShareMeet = () => {
+        console.log('blah')
     }
     public render() {
 
@@ -78,7 +82,7 @@ export default class MeetPage extends React.Component<{}, IMeetPageState> {
         return (
             <div>
                 <Header>
-                    <LogoNav backPage={true} shareButton={true} />
+                    <NavHeader backPage={true} action={{ type: 'share', onClick: this.handleShareMeet }} />
                 </Header>
                 <MeetDetails>
                     <VenueDetails><h2>Vegie Bar</h2> <div><img src={cutlery} alt="fork and knife" /><p>Modern European</p></div></VenueDetails>

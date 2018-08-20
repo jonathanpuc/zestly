@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LogoNav from '../../components/general/LogoNav'
+import NavHeader from '../../components/general/NavHeader'
 import Search from '../../components/general/Search'
 import styled from 'styled-components'
 import MeetsList from './List'
@@ -12,7 +12,7 @@ export default class Meets extends React.Component<IMeetsProps, {}> {
         return (
             <div>
                 <Header>
-                    <LogoNav backPage={true} />
+                    <NavHeader backPage={true} />
                     <Search />
                 </Header>
                 <MeetsSection>

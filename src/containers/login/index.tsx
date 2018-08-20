@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import EmailLoginInterface from './EmailLogin'
-import LogoNav from '../../components/general/LogoNav'
+import NavHeader from '../../components/general/NavHeader'
 import logo from '../../img/logo.svg'
 import homeBG from './home.png'
 interface IState {
@@ -49,7 +49,7 @@ export default class Login extends React.Component<{}, IState> {
             <Outer>
 
                 {
-                    this.state.emailAuth ? <React.Fragment><LogoNav backPage={this.state.emailAuth} onBackClick={this.handleBackClick} /><EmailLoginInterface /></React.Fragment> : this.renderMain()
+                    this.state.emailAuth ? <React.Fragment><NavHeader backPage={this.state.emailAuth} onBackClick={this.handleBackClick} /><EmailLoginInterface /></React.Fragment> : this.renderMain()
                 }
             </Outer>
 

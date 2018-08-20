@@ -4,14 +4,16 @@ import logo from '../../img/logo.svg'
 import arrowLeft from '../../img/icons/arrow-left.svg'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import share from '../../img/icons/share.svg'
+import tick from '../../img/icons/tick.svg'
 interface IProps extends RouteComponentProps<{}> {
     backPage: boolean,
+    heading?: string,
+    action?: { type: string, onClick: () => void },
     onBackClick?: () => void,
-    shareButton?: boolean,
     fill?: boolean
 }
 
-const LogoNav: React.SFC<IProps> = (props) => {
+const NavHeader: React.SFC<IProps> = (props) => {
     const handleBackClick = () => {
         // if callback function has been passed, call it
         if (props.onBackClick) {
@@ -19,12 +21,23 @@ const LogoNav: React.SFC<IProps> = (props) => {
         } else {
             props.history.goBack()
         }
+    }
+
+    const handleActionClick = () => {
+        if (props.action) {
+            // tslint:disable-next-line
+            props.action ? props.action.onClick() : () => { }
+        }
 
     }
 
-    const shareFunction = () => {
-        console.log('share clicked')
+    const actionIconReducer = {
+        share,
+        confirm: tick
     }
+
+    const actionIcon = props.action ? actionIconReducer[props.action.type] : ''
+
 
     return (
         <Outer fill={props.fill}>
@@ -33,19 +46,24 @@ const LogoNav: React.SFC<IProps> = (props) => {
                     <BackArrow ><img onClick={handleBackClick} src={arrowLeft} alt="go back" /></BackArrow>
                 )
             }
-            <Logo><img src={logo} alt="zestly" /></Logo>
 
-            {props.shareButton && <div ><img onClick={shareFunction} src={share} alt='share meet' /></div>}
+            <Heading>
+                {props.heading ? <h2>{props.heading}</h2> : <h1><img src={logo} alt="zestly" /></h1>}
+            </Heading>
+
+
+
+            {actionIcon && <div ><img onClick={handleActionClick} src={actionIcon} alt={props.action && props.action.type} /></div>}
         </Outer>
     )
 
 }
 
-export default withRouter(LogoNav)
+export default withRouter(NavHeader)
 
 const Outer = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: min-content 1fr min-content;
     padding: 2.3rem 1rem 1rem 1rem;
     background-color: ${(props: any) => props.fill ? '#fff' : 'inherit'};
     img {
@@ -59,11 +77,16 @@ const Outer = styled.div`
         padding-right: 20px; 
     }
 `
-
-const Logo = styled.h1`
+const Heading = styled.div`
     grid-column: 2 / 3;
     justify-self: center;
     align-items: center;
+
+    h2 {
+	color: #4A4A4A;
+    font-size: 1.8rem;
+    font-weight: 300;
+    }
 `
 
 const BackArrow = styled.div`
