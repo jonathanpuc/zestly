@@ -102,5 +102,5 @@ const Heading = styled.div`
 const BackArrow = styled.div`
   grid-column: 1 / 2;
   align-self: center;
-  padding-left: 20px;
+  padding-left: 10px;
 `

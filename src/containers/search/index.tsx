@@ -22,7 +22,7 @@ class Search extends React.Component<ISearchProps, {}> {
           {type === 'feasts' ? (
             <HeadNav>
               <NavHeader backPage={true} />
-              <SearchBar />
+              <SearchBar autofocus={true} />
             </HeadNav>
           ) : (
             <PlacesSearchBar>
