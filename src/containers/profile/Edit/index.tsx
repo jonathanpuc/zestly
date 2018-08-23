@@ -1,14 +1,14 @@
-import * as React from "react"
-import NavHeader from "../../../components/general/NavHeader"
-import { withRouter, RouteComponentProps } from "react-router-dom"
-import ProfilePhotoGrid from "../../../components/profile/ProfilePhotoGrid"
-import styled from "styled-components"
-import love from "../../../img/icons/love.svg"
-import people from "../../../img/icons/people.svg"
-import plus from "../../../img/icons/plus.svg"
-import instagram from "../../../img/icons/instagram.png"
-import tick from "../../../img/icons/tick.svg"
-import ButtonStyle from "../../../components/styles/Button"
+import * as React from 'react'
+import NavHeader from '../../../components/general/NavHeader'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import ProfilePhotoGrid from '../../../components/profile/ProfilePhotoGrid'
+import styled from 'styled-components'
+import love from '../../../img/icons/love.svg'
+import people from '../../../img/icons/people.svg'
+import plus from '../../../img/icons/plus.svg'
+import instagram from '../../../img/icons/instagram.png'
+import tick from '../../../img/icons/tick.svg'
+import ButtonStyle from '../../../components/styles/Button'
 
 interface IProfileEditProps extends RouteComponentProps<{}> {
   backPage: boolean
@@ -26,14 +26,14 @@ class ProfileEdit extends React.Component<
   IProfileEditState
 > {
   public state = {
-    aboutMe: ""
+    aboutMe: ''
   }
   public confirmChanges = () => {
-    console.log("changes confirmed")
+    console.log('changes confirmed')
   }
 
   public exit = () => {
-    this.props.history.push("/home/profile")
+    this.props.history.push('/home/profile')
   }
 
   public handleAboutMe = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,7 +46,7 @@ class ProfileEdit extends React.Component<
           backPage={true}
           heading="Edit your profile"
           onBackClick={this.exit}
-          action={{ type: "confirm", onClick: this.confirmChanges }}
+          action={{ type: 'confirm', onClick: this.confirmChanges }}
         />
         <Margin>
           <ProfilePhotoGrid />
@@ -215,8 +215,9 @@ const InstagramBlock = styled(InputBlock)`
 
     img {
       position: absolute;
-      right: 15px;
-      bottom: 15px;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 `
