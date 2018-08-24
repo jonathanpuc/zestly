@@ -13,7 +13,7 @@ interface IHomeState {
   meets: string[]
 }
 
-interface IHomeProps extends RouteComponentProps<{}> {}
+interface IHomeProps extends RouteComponentProps<{}> { }
 class Home extends React.Component<IHomeProps, IHomeState> {
   public state = {
     meets: []
@@ -109,7 +109,8 @@ export default withRouter(Home)
 const Header = styled.div`
   background-color: #fff;
   border-bottom: 1px solid #e6e6e6;
-  padding: 13px 0 10px 0;
+  padding-bottom: 15px;
+  transform: translateY(-6.5px);
 `
 const MainContent = styled.div`
   padding-bottom: 5rem;
@@ -133,7 +134,7 @@ const MainContent = styled.div`
   }
 `
 
-const SectionButton = styled(ButtonStyle)`
+const SectionButton = styled(ButtonStyle) `
   height: 3.2rem;
   width: 13rem;
   border-radius: 4px;

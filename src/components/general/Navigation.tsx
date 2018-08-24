@@ -1,10 +1,11 @@
 import * as React from 'react'
 import styled from 'styled-components'
 // Assets
-import profile from '../../img/icons/profile.svg'
+// import profile from '../../img/icons/profile.svg'
 import chat from '../../img/icons/chat.svg'
 import logo from '../../img/logo.svg'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
+import Sprite from '../icons'
 
 interface IStyles {
   left: string
@@ -21,7 +22,7 @@ interface INavigationState {
   viewing: string
 }
 
-interface INavigationProps extends RouteComponentProps<{}> {}
+interface INavigationProps extends RouteComponentProps<{}> { }
 
 class Navigation extends React.Component<INavigationProps, INavigationState> {
   public state = {
@@ -73,7 +74,7 @@ class Navigation extends React.Component<INavigationProps, INavigationState> {
             },
             messages: {
               left: '',
-              translateX: '4rem',
+              translateX: '5rem',
               right: '0%'
             }
           }
@@ -106,12 +107,12 @@ class Navigation extends React.Component<INavigationProps, INavigationState> {
             profile: {
               left: '0%',
               right: 'initial',
-              translateX: '-4rem'
+              translateX: '-5rem'
             },
             logo: {
               left: '0%',
               right: 'initial',
-              translateX: '-2rem'
+              translateX: '-3rem'
             },
             messages: {
               left: '50%',
@@ -128,7 +129,7 @@ class Navigation extends React.Component<INavigationProps, INavigationState> {
 
   public setStyle = (page: string) => {
     const style = this.getStylingState(page)
-    this.setState({ ...this.state, ...style })
+    this.setState({ ...this.state, ...style, viewing: page })
   }
 
   public onProfileSelected = () => {
@@ -148,9 +149,10 @@ class Navigation extends React.Component<INavigationProps, INavigationState> {
 
   public render() {
     return (
-      <Nav viewing={this.state.viewing} styles={this.state.styles}>
-        <ProfileIcon>
-          <img onClick={this.onProfileSelected} src={profile} alt="profile" />
+      <Nav styles={this.state.styles}>
+        <ProfileIcon onClick={this.onProfileSelected}>
+          <Sprite icon="profile" color={this.state.viewing === 'profile' ? '#5A4DB2' : ''} />
+
         </ProfileIcon>
         <LogoIcon onClick={this.onLogoSelected}>
           <h1>
@@ -179,21 +181,26 @@ const MessagesIcon = styled.div``
 
 const Nav = styled.nav`
   height: 5.6rem;
-  padding-top: 2rem;
+  /* position: relative; */
+  display: flex;
 
   div {
     transition: all 0.1s linear;
     position: absolute;
     display: inline-block;
     padding: 0 1.5rem;
+    /* top: 50%;
+    transform: translateY(-50%); */
   }
   ${ProfileIcon} {
     left: ${(props: any) => props.styles.profile.left};
     right: ${(props: any) => props.styles.profile.right};
     transform: ${(props: any) =>
-      `translate(${props.styles.profile.translateX})`};
+    `translate(${props.styles.profile.translateX})`};
+ 
   }
   ${LogoIcon} {
+    margin-top: 2px;
     left: ${(props: any) => props.styles.logo.left};
     right: ${(props: any) => props.styles.logo.right};
     transform: ${(props: any) => `translate(${props.styles.logo.translateX})`};
@@ -202,6 +209,6 @@ const Nav = styled.nav`
     left: ${(props: any) => props.styles.messages.left};
     right: ${(props: any) => props.styles.messages.right};
     transform: ${(props: any) =>
-      `translate(${props.styles.messages.translateX})`};
+    `translate(${props.styles.messages.translateX})`};
   }
 `
