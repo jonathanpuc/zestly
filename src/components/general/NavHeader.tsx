@@ -6,92 +6,101 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import share from '../../img/icons/share.svg'
 import tick from '../../img/icons/tick.svg'
 interface IProps extends RouteComponentProps<{}> {
-    backPage: boolean,
-    heading?: string,
-    action?: { type: string, onClick: () => void },
-    onBackClick?: () => void,
-    fill?: boolean
+  backPage: boolean
+  heading?: string
+  action?: { type: string; onClick: () => void }
+  onBackClick?: () => void
+  fill?: boolean
 }
 
-const NavHeader: React.SFC<IProps> = (props) => {
-    const handleBackClick = () => {
-        // if callback function has been passed, call it
-        if (props.onBackClick) {
-            props.onBackClick()
-        } else {
-            props.history.goBack()
-        }
+const NavHeader: React.SFC<IProps> = props => {
+  const handleBackClick = () => {
+    // if callback function has been passed, call it
+    if (props.onBackClick) {
+      props.onBackClick()
+    } else {
+      props.history.goBack()
     }
+  }
 
-    const handleActionClick = () => {
-        if (props.action) {
-            // tslint:disable-next-line
-            props.action ? props.action.onClick() : () => { }
-        }
-
+  const handleActionClick = () => {
+    if (props.action) {
+      // tslint:disable-next-line
+      props.action ? props.action.onClick() : () => {}
     }
+  }
 
-    const actionIconReducer = {
-        share,
-        confirm: tick
-    }
+  const actionIconReducer = {
+    share,
+    confirm: tick
+  }
 
-    const actionIcon = props.action ? actionIconReducer[props.action.type] : ''
+  const actionIcon = props.action ? actionIconReducer[props.action.type] : ''
 
+  return (
+    <Outer fill={props.fill}>
+      {props.backPage && (
+        <BackArrow>
+          <img onClick={handleBackClick} src={arrowLeft} alt="go back" />
+        </BackArrow>
+      )}
 
-    return (
-        <Outer fill={props.fill}>
-            {
-                props.backPage && (
-                    <BackArrow ><img onClick={handleBackClick} src={arrowLeft} alt="go back" /></BackArrow>
-                )
-            }
+      <Heading>
+        {props.heading ? (
+          <h2>{props.heading}</h2>
+        ) : (
+          <h1>
+            <img src={logo} alt="zestly" />
+          </h1>
+        )}
+      </Heading>
 
-            <Heading>
-                {props.heading ? <h2>{props.heading}</h2> : <h1><img src={logo} alt="zestly" /></h1>}
-            </Heading>
-
-
-
-            {actionIcon && <div ><img onClick={handleActionClick} src={actionIcon} alt={props.action && props.action.type} /></div>}
-        </Outer>
-    )
-
+      {actionIcon && (
+        <ActionButton>
+          <img
+            onClick={handleActionClick}
+            src={actionIcon}
+            alt={props.action && props.action.type}
+          />
+        </ActionButton>
+      )}
+    </Outer>
+  )
 }
 
 export default withRouter(NavHeader)
 
+const ActionButton = styled.div``
 const Outer = styled.div`
-    display: grid;
-    grid-template-columns: min-content 1fr min-content;
-    padding: 2.3rem 1rem 1rem 1rem;
-    background-color: ${(props: any) => props.fill ? '#fff' : 'inherit'};
-    img {
-        cursor: pointer;
-    }
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  padding: 2.3rem 1rem 1rem 1rem;
+  background-color: ${(props: any) => (props.fill ? '#fff' : 'inherit')};
+  img {
+    cursor: pointer;
+  }
 
-    > div:last-child {
-        align-self: center;
-        grid-column: 3 / 4;
-        justify-self: end;
-        padding-right: 20px; 
-    }
+  ${ActionButton} {
+    align-self: center;
+    grid-column: 3 / 4;
+    justify-self: end;
+    padding-right: 20px;
+  }
 `
 const Heading = styled.div`
-    grid-column: 2 / 3;
-    justify-self: center;
-    align-items: center;
+  grid-column: 2 / 3;
+  justify-self: center;
+  align-items: center;
 
-    h2 {
-	color: #4A4A4A;
+  h2 {
+    color: #4a4a4a;
     font-size: 1.8rem;
     font-weight: 300;
-    }
+  }
 `
 
 const BackArrow = styled.div`
-    grid-column: 1 / 2;
-    align-self: center;
-    padding-left: 20px;
+  grid-column: 1 / 2;
+  align-self: center;
+  padding-left: 10px;
 `
-
