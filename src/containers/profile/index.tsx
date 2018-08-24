@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import TipCard from '../../components/profile/TipCard'
 import Slider from '../../components/general/Slider'
 import pin from '../../img/icons/pin.svg'
@@ -31,7 +32,7 @@ export default class Profile extends React.Component<{}, {}> {
                     </Location>
 
                     <Tabs>
-                        <div><img src={editDot} alt="edit profile" />Edit profile</div>
+                        <div><Link to="/profile/edit"><img src={editDot} alt="edit profile" />Edit profile</Link></div>
                         <div><img src={cog} alt="account settings" />Settings</div>
                     </Tabs>
                 </Main>

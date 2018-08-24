@@ -79,6 +79,11 @@ input {
   font-family: 'Larsseit';
 }
 
+a {
+  text-decoration: none;
+  color: #2E2E2E;
+}
+
 @media only screen and (max-width: 350px) {
   html {
     font-size: 54%;
