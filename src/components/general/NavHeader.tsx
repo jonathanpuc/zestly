@@ -10,7 +10,8 @@ interface IProps extends RouteComponentProps<{}> {
   heading?: string
   action?: { type: string; onClick: () => void }
   onBackClick?: () => void
-  fill?: boolean
+  fill?: boolean,
+  paddingTop?: boolean
 }
 
 const NavHeader: React.SFC<IProps> = props => {
@@ -38,7 +39,7 @@ const NavHeader: React.SFC<IProps> = props => {
   const actionIcon = props.action ? actionIconReducer[props.action.type] : ''
 
   return (
-    <Outer fill={props.fill}>
+    <Outer fill={props.fill} paddingTop={props.paddingTop || false}>
       {props.backPage && (
         <BackArrow>
           <img onClick={handleBackClick} src={arrowLeft} alt="go back" />
@@ -74,7 +75,7 @@ const ActionButton = styled.div``
 const Outer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  padding: 0.70rem 1rem 1rem 1rem;
+  padding: ${(props: any) => props.paddingTop ? '1.7rem 1rem 1rem 1rem' : '0.70rem 1rem 1rem 1rem'};
   background-color: ${(props: any) => (props.fill ? '#fff' : 'inherit')};
   img {
     cursor: pointer;

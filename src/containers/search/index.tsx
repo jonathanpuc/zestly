@@ -4,9 +4,6 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import NavHeader from '../../components/general/NavHeader'
 import SearchBar from '../../components/general/Search'
 import cross from '../../img/icons/cross.svg'
-import cutlery from '../../img/icons/cutlery.svg'
-import arrowRight from '../../img/icons/arrow-right.svg'
-// import pin from '../../img/icons/pin.svg'
 
 import Sprite from '../../components/icons'
 
@@ -46,22 +43,22 @@ class Search extends React.Component<ISearchProps, {}> {
           <p>Suggestions</p>
         </LabelBlock>
         <ListItem>
-          <img src={cutlery} alt="food" />
+          <Sprite icon='cutlery' color="#5A4DB2" />
           <p>Vegie Bar</p>
-          <img src={arrowRight} alt="go to restaurant page" />
+          <Sprite icon='arrow-right' color="#ACACAC" />
         </ListItem>
         <ListItem>
-          <img src={cutlery} alt="food" />
+          <Sprite icon='cutlery' color="#5A4DB2" />
           <p>Ramen</p>
-          <img src={arrowRight} alt="search" />
+          <Sprite icon='arrow-right' color="#ACACAC" />
         </ListItem>
         <LabelBlock>
           <p>Recent searches</p>
         </LabelBlock>
         <ListItem>
-          <Sprite icon='pin' color="#ACACAC" />
+          <Sprite icon='pin' color="#5A4DB2" />
           <p>Collingwood</p>
-          <img src={arrowRight} alt="go to restaurant page" />
+          <Sprite icon='arrow-right' color="#ACACAC" />
         </ListItem>
       </React.Fragment>
     )
@@ -120,7 +117,7 @@ const ListItem = styled.div`
     font-size: 1.8rem;
     font-weight: 500;
   }
-  img {
-    margin-right: 20px;
+  svg {
+    margin-right: 12px;
   }
 `

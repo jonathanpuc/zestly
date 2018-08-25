@@ -1,8 +1,15 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import styled, { withTheme, ThemeProps } from 'styled-components'
 import Sprite from '../../components/icons'
+import { IThemeProps } from '../../theme'
 
-interface ISeekingTagProps { type: string, seeking: string[], onTagClick: (type: string) => void }
+
+interface ISeekingTagProps extends ThemeProps<IThemeProps> {
+    type: string,
+    seeking: string[],
+    onTagClick: (type: string) => void
+
+}
 
 const SeekingTag: React.SFC<ISeekingTagProps> = (props) => {
 
@@ -12,28 +19,30 @@ const SeekingTag: React.SFC<ISeekingTagProps> = (props) => {
     // @ts-ignore
     const isActive = props.seeking.includes(props.type)
 
+
     const icons = {
-        'relationship': <Sprite icon='heart' color={isActive ? '#B6486D' : ''} />,
-        'friends': <Sprite icon='people' color={isActive ? '#286555' : ''} />
+        'relationship': <Sprite icon='heart' color={isActive ? props.theme.pinkDark : ''} />,
+        'friends': <Sprite icon='people' color={isActive ? props.theme.greenDark : ''} />
     }
 
-    const tagColor = {
-        'relationship': '#FCA1C0',
-        'friends': '#69B4A0'
+    const styles = {
+        'relationship': {
+            tagColor: props.theme.pink,
+            textColor: props.theme.pinkDark
+        },
+        'friends': {
+            tagColor: props.theme.green,
+            textColor: props.theme.greenDark
+        }
     }
 
-    const fontColor = {
-        'relationship': '#B6486D',
-        'friends': '#286555'
-    }
-
+    const iconStyle = styles[props.type]
 
     return (
         <Outer
             onClick={handleClick}
             isActive={isActive}
-            bgColor={tagColor[props.type]}
-            textColor={fontColor[props.type]}
+            iconStyle={iconStyle}
         >
             {icons[props.type]}
             <p>{props.type}</p>
@@ -41,15 +50,15 @@ const SeekingTag: React.SFC<ISeekingTagProps> = (props) => {
     )
 }
 
-export default SeekingTag
+export default withTheme(SeekingTag)
 
 const Outer = styled.div`
   padding: 0px 14px;
   font-size: 1.4rem;
   height: 3.6rem;
   border-radius: 18px;
-  background-color: ${(props: any) => props.isActive ? props.bgColor : props.theme.offwhite};
-  color: ${(props: any) => props.isActive ? props.textColor : 'inherit'};
+  background-color: ${(props: any) => props.isActive ? props.iconStyle.tagColor : props.theme.offwhite};
+  color: ${(props: any) => props.isActive ? props.iconStyle.textColor : 'inherit'};
   transition: all 0.1s linear;
   display: flex;
   justify-content: space-around;

@@ -5,7 +5,7 @@ import copy from '../../img/icons/copy.svg'
 import eyehide from '../../img/icons/eyehide.svg'
 import eyereveal from '../../img/icons/eyereveal.svg'
 import warning from '../../img/icons/warning.svg'
-import tick from '../../img/icons/tick.svg'
+import Sprite from '../../components/icons'
 import Slider from 'rc-slider';
 import ButtonStyle from '../../components/styles/Button'
 
@@ -80,9 +80,13 @@ class AccountSettings extends React.Component<IAccountSettingsProps, IAccountSet
         const { email, password, profileUrl, feastsDistance } = this.state.accountSettings
 
         return (
-            <div>
-                <NavHeader backPage={true} />
-                <Heading>Account settings</Heading>
+            <Outer>
+                <NavHeader
+                    backPage={true}
+                    heading="Edit your profile"
+                    action={{ type: 'confirm', onClick: this.confirmChanges }}
+                    paddingTop={true}
+                />
                 <InputGroup>
                     <label htmlFor="feastsRange">
                         Find feasts up to
@@ -107,6 +111,7 @@ class AccountSettings extends React.Component<IAccountSettingsProps, IAccountSet
                         />
                     </InputBlock>
                 </InputGroup>
+                {/* if Auth.user.facebook || google dont show the input below */}
                 <InputGroup>
                     <label htmlFor="accountPassword">
                         Password
@@ -131,7 +136,7 @@ class AccountSettings extends React.Component<IAccountSettingsProps, IAccountSet
                 <EditButtons>
                     <p onClick={this.exit}>Discard changes</p>
                     <ConfirmButton onClick={this.confirmChanges}>
-                        <img src={tick} alt="confirm changes" />
+                        <Sprite icon='tick' color='#fff' />
                         Save changes
                     </ConfirmButton>
                 </EditButtons>
@@ -144,22 +149,23 @@ class AccountSettings extends React.Component<IAccountSettingsProps, IAccountSet
                         <p>Delete account</p>
                     </div>
                 </DeleteAccount>
-            </div>
+            </Outer>
         )
     }
 }
 
-const Heading = styled.h2`
-    margin: 0px 0px 24px 9px;
+const Outer = styled.div`
+    background-color: #fff;
 `
+
 
 const InputGroup = styled.div`
     margin: 15px 0px;
      label {
         display: block;
         margin-left: 9px;
-        font-size: 1.8rem;
-        font-weight: 500;
+        font-size: 1.6rem;
+        font-weight: 400;
         color: ${props => props.theme.purple};
     }
     &:not(:last-child) {
@@ -221,10 +227,14 @@ const Distance = InputBlock.extend`
 const DistanceDetails = styled.div`
     display: flex;
     justify-content: space-between;
+    p:first-child {
+	color: ${props => props.theme.grey};
+	font-size: 14px;
+    }
     p:last-child {
         color: ${props => props.theme.purple};
         margin-right: 9px;
-        font-weight: 500;
+        font-weight: 600;
     }
 `
 
@@ -248,7 +258,7 @@ const ConfirmButton = ButtonStyle.extend`
     display: flex;
     justify-content: center;
     align-items: center;
-    img {
+    svg {
         margin: 0px 7px 5px 0px;
     }
 `
@@ -268,7 +278,7 @@ const DeleteAccount = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        img {
+        svg {
             margin: 0px 7px 5px 0px;
         }
         text-transform: uppercase;

@@ -1,17 +1,21 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import styled, { withTheme, ThemeProps } from 'styled-components'
 import magnify from '../../img/icons/magnify.svg'
-import cross from '../../img/icons/cross.svg'
+// import cross from '../../img/icons/cross.svg'
+import Sprite from '../../components/icons'
+import { IThemeProps } from '../../theme'
+
+
 interface ISearchBarState {
   query: string
 }
 
-interface ISearchBarProps {
-  autofocus?: boolean
+interface ISearchBarProps extends ThemeProps<IThemeProps> {
+  autofocus?: boolean,
   onInputClick?: () => void
 }
 
-const NO_OP = () => {}
+const NO_OP = () => { }
 
 class Searchbar extends React.Component<ISearchBarProps, ISearchBarState> {
   public state = {
@@ -29,7 +33,7 @@ class Searchbar extends React.Component<ISearchBarProps, ISearchBarState> {
 
   public render() {
     const { query } = this.state
-    const { autofocus } = this.props
+    const { autofocus, theme } = this.props
     const shouldFocus = autofocus ? true : false
     return (
       <Outer query={query} onClick={this.handleClick}>
@@ -41,10 +45,10 @@ class Searchbar extends React.Component<ISearchBarProps, ISearchBarState> {
         />
         <Icon>
           {this.state.query ? (
-            <img src={cross} alt="clear search" />
+            <Sprite icon='cross' color={theme.purple} />
           ) : (
-            <img src={magnify} alt="search" />
-          )}
+              <img src={magnify} alt="search" />
+            )}
         </Icon>
       </Outer>
     )
@@ -95,4 +99,4 @@ const Outer = styled.div`
   }
 `
 
-export default Searchbar
+export default withTheme(Searchbar)

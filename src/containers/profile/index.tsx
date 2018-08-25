@@ -1,17 +1,24 @@
 import * as React from 'react';
-import styled from 'styled-components'
+import styled, { withTheme, ThemeProps } from 'styled-components'
 import { Link } from 'react-router-dom'
 import TipCard from '../../components/profile/TipCard'
 import Slider from '../../components/general/Slider'
-import pin from '../../img/icons/pin.svg'
-import editDot from '../../img/icons/editDot.svg'
-import cog from '../../img/icons/cog.svg'
+import Sprite from '../../components/icons'
+import { IThemeProps } from '../../theme'
 
-export default class Profile extends React.Component<{}, {}> {
+interface IProfileProps extends ThemeProps<IThemeProps> {
+
+
+
+}
+
+class Profile extends React.Component<IProfileProps, {}> {
 
 
 
     public render() {
+
+        const { theme } = this.props
 
         const sliderSettings = {
             infinite: false,
@@ -27,13 +34,13 @@ export default class Profile extends React.Component<{}, {}> {
                     <img src="http://www.fillmurray.com/700/700" alt="your profile photo" />
                     <h2>Bill, 67</h2>
                     <Location>
-                        <img src={pin} alt="location" />
+                        <Sprite icon='pin' />
                         Collingwood
                     </Location>
 
                     <Tabs>
-                        <div><Link to="/profile/edit"><img src={editDot} alt="edit profile" />Edit profile</Link></div>
-                        <div><img src={cog} alt="account settings" />Settings</div>
+                        <div><Link to="/profile/edit"><Sprite icon='edit' notification={true} color={theme.purple} />Edit profile</Link></div>
+                        <div><Link to="/settings"><Sprite icon='settings' color={theme.purple} />Settings</Link></div>
                     </Tabs>
                 </Main>
                 <TipsAndTricks>
@@ -52,13 +59,15 @@ export default class Profile extends React.Component<{}, {}> {
 
 }
 
+export default withTheme(Profile)
+
 const Location = styled.div`
     display: flex;
     align-items: center;
     font-size: 12px;
     margin: 4px 0px 15px 0px;
     color: ${props => props.theme.grey};
-    img {
+    svg {
         height: 13px;
         width: 9px;
         margin-right: 6.5px;
@@ -74,8 +83,13 @@ const Tabs = styled.div`
         padding: 15px 0px;
         display: flex;
         justify-content: space-around;
-        img {
+        align-items: center;
+        svg {
             margin-right: 12px;
+        }
+
+        a {
+            display: flex;
         }
     }
 `

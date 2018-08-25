@@ -6,10 +6,10 @@ import styled from 'styled-components'
 
 import plus from '../../../img/icons/plus.svg'
 import instagram from '../../../img/icons/instagram.png'
-import tick from '../../../img/icons/tick.svg'
+
 import ButtonStyle from '../../../components/styles/Button'
 import SeekingTag from '../SeekingTag'
-
+import Sprite from '../../../components/icons'
 
 interface IProfileEditProps extends RouteComponentProps<{}> {
   backPage: boolean
@@ -61,6 +61,7 @@ class ProfileEdit extends React.Component<
           heading="Edit your profile"
           onBackClick={this.exit}
           action={{ type: 'confirm', onClick: this.confirmChanges }}
+          paddingTop={true}
         />
         <Margin>
           <ProfilePhotoGrid />
@@ -112,7 +113,7 @@ class ProfileEdit extends React.Component<
           <ButtonStyle>Discard changes</ButtonStyle>
 
           <ButtonStyle>
-            <img src={tick} alt="confirm" />
+            <Sprite icon='tick' color='#fff' />
             Save changes
           </ButtonStyle>
         </ConfirmEdits>
