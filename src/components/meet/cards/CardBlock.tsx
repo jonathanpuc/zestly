@@ -2,14 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components'
 // Components
 import ProfileIcons from '../../general/ProfileIcons'
-import Sprite from '../../icons'
+import LocationPin from './LocationPin'
 
 const Card: React.SFC<{}> = (place) => {
     return (
         <CardOuter>
             <CardPhoto>
-                <span>
-                    <Sprite icon="pin" color='#fff' />Fitzroy</span>
+                <LocationPin location='Fitzroy' />
             </CardPhoto>
             <CardDetails>
                 <div>
@@ -36,19 +35,12 @@ const CardPhoto = styled.div`
     background-color: ${props => props.theme.blueFaded};
     position: relative;
     border-radius: 6px 6px 0px 0px;
-    span {
-        text-transform: uppercase;
-        font-size: 1.2rem;
-        color: #fff;
+    > div:first-child {
         position: absolute;
         bottom: .5rem;
         left: 1.5rem;
     }
 
-    svg {
-        height: 1.3rem;
-        width: 1rem;
-    }
 `
 
 const CardDetails = styled.div`

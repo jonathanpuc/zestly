@@ -5,6 +5,7 @@ import Search from '../../components/general/Search'
 import CardMeetCTA from '../../components/meet/cards/CardMeetCTA'
 import CardBlock from '../../components/meet/cards/CardBlock'
 import CardLarge from '../../components/meet/cards/CardLarge'
+import CardRestaurant from '../../components/meet/cards/CardRestaurant'
 import Slider from '../../components/general/Slider'
 import Button from '../../components/general/Button'
 import ButtonStyle from '../../components/styles/Button'
@@ -76,6 +77,11 @@ class Home extends React.Component<IHomeProps, IHomeState> {
             </Slider>
             <SectionButton>More meets</SectionButton>
           </section>
+
+          <div>
+
+            <CardRestaurant />
+          </div>
           <div>
             <CardMeetCTA />
           </div>
@@ -110,7 +116,7 @@ const Header = styled.div`
   background-color: #fff;
   border-bottom: 1px solid #e6e6e6;
   padding-bottom: 15px;
-  transform: translateY(-6.5px);
+  margin-top: -10.5px;
 `
 const MainContent = styled.div`
   padding-bottom: 5rem;

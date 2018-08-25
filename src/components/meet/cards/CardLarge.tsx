@@ -1,16 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components'
-// Assets
-import pin from '../../../img/icons/pin.svg'
 // Components
 import ProfileIcons from '../../general/ProfileIcons'
-
+import LocationPin from './LocationPin'
 
 const Card: React.SFC<{}> = (place) => {
     return (
         <CardOuter>
             <CardPhoto>
-                <span><img src={pin} alt="map pin" /> Fitzroy</span>
+                <LocationPin location='Fitzroy' />
                 <ProfileIcons />
             </CardPhoto>
             <CardDetails>
@@ -32,10 +30,7 @@ const CardPhoto = styled.div`
     height: 24rem;
     background: #000;
     position: relative;
-    span {
-        text-transform: uppercase;
-        font-size: 1.2rem;
-        color: #fff;
+    > div:first-child {
         position: absolute;
         bottom: 1.5rem;
         left: 1.5rem;
@@ -46,10 +41,7 @@ const CardPhoto = styled.div`
         bottom: 1.2rem;
         right: 1.5rem;
     }
-    img {
-        height: 1.3rem;
-        width: 1rem;
-    }
+
 `
 
 const CardDetails = styled.div`

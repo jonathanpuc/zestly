@@ -1,15 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components'
 // Assets
-import pin from '../../../img/icons/pin.svg'
+import Sprite from '../../icons'
+import LocationPin from './LocationPin'
 
 const Card: React.SFC<{}> = (place) => {
     return (
         <CardOuter>
-            <span><img src={pin} alt="map pin" /> Fitzroy</span>
+            <LocationPin location='fitzroy' />
             <h3>Vegie bar</h3>
             <h5>Modern European</h5>
-            <span>&rarr;</span>
+            <Sprite icon='arrow-right' color="#fff" />
         </CardOuter>
     )
 }
@@ -22,9 +23,7 @@ const CardOuter = styled.div`
     background: #000;
     position: relative;
     color: #fff;
-    span:first-child {
-        text-transform: uppercase;
-        font-size: 1.2rem;
+    div:first-child {
         position: absolute;
         bottom: 5rem;
         left: 1.5rem;
@@ -43,14 +42,9 @@ const CardOuter = styled.div`
         right: 1.5rem;
         font-weight: 400;
     }
-    span:last-child {
-        font-size: 2rem;
+    > svg:last-child {
         position: absolute;
-        bottom: .8rem;
-        right: 1.5rem;
-    }
-    img {
-        height: 1.3rem;
-        width: 1rem;
+        bottom: 1.8rem;
+        right: 2.2rem;
     }
 `

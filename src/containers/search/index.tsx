@@ -6,12 +6,14 @@ import SearchBar from '../../components/general/Search'
 import cross from '../../img/icons/cross.svg'
 import cutlery from '../../img/icons/cutlery.svg'
 import arrowRight from '../../img/icons/arrow-right.svg'
-import pin from '../../img/icons/pin.svg'
+// import pin from '../../img/icons/pin.svg'
+
+import Sprite from '../../components/icons'
 
 interface IMatchParams {
   type: string
 }
-interface ISearchProps extends RouteComponentProps<IMatchParams> {}
+interface ISearchProps extends RouteComponentProps<IMatchParams> { }
 class Search extends React.Component<ISearchProps, {}> {
   public render() {
     const { type } = this.props.match.params
@@ -25,11 +27,11 @@ class Search extends React.Component<ISearchProps, {}> {
               <SearchBar autofocus={true} />
             </HeadNav>
           ) : (
-            <PlacesSearchBar>
-              <input type="text" placeholder="Try &quot;Ramen&quot;" />
-              <img src={cross} alt="clear search" />
-            </PlacesSearchBar>
-          )}
+              <PlacesSearchBar>
+                <input type="text" placeholder="Try &quot;Ramen&quot;" />
+                <img src={cross} alt="clear search" />
+              </PlacesSearchBar>
+            )}
         </HeaderOuter>
       )
     }
@@ -57,7 +59,7 @@ class Search extends React.Component<ISearchProps, {}> {
           <p>Recent searches</p>
         </LabelBlock>
         <ListItem>
-          <img src={pin} alt="suburb" />
+          <Sprite icon='pin' color="#ACACAC" />
           <p>Collingwood</p>
           <img src={arrowRight} alt="go to restaurant page" />
         </ListItem>

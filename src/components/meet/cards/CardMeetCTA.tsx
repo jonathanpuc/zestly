@@ -1,17 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components'
 // Assets
-import rightArrow from '../../../img/icons/arrow-right.svg'
-import pin from '../../../img/icons/pin.svg'
-
+import LocationPin from './LocationPin'
+import Sprite from '../../icons'
 
 const Card: React.SFC<{}> = (place) => {
     return (
         <CardOuter>
-            <span><img src={pin} alt="map pin" /> Fitzroy</span>
+            <LocationPin location='Fitzroy' />
             <h3>Vegie bar</h3>
             <h5>Modern European</h5>
-            <Arrow src={rightArrow} alt="go" />
+            <Sprite icon='arrow-right' color='#fff' />
             <button>Meet here</button>
         </CardOuter>
     )
@@ -25,20 +24,19 @@ const CardOuter = styled.div`
     background: #5A4DB2;
     position: relative;
     color: #fff;
-    span:first-child {
-        text-transform: uppercase;
-        font-size: 1.2rem;
+
+    > div:first-child {
         position: absolute;
         bottom: 7rem;
         right: 8.6rem;
-        img {
-            height: 1.3rem;
-            width: 1rem;
-            svg {
-                fill: #fff;
-            }
-        }
     }
+
+    > svg {
+        position: absolute;
+        bottom: 50%;
+        right: 1.5rem;
+    }
+  
     h3 {
         font-size: 2.4rem;
         position: absolute;
@@ -70,11 +68,4 @@ const CardOuter = styled.div`
         letter-spacing: .5px;
     }
 
-`
-const Arrow = styled.img`
-    width: 1.5rem;
-    height: 1.5rem;
-    position: absolute;
-    bottom: 50%;
-    right: 1.5rem;
 `

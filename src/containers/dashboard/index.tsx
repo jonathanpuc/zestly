@@ -44,7 +44,7 @@ class Dashboard extends React.Component<IProps, {}> {
 
 const Header = styled.div`
   background-color: #fff;
-  padding: 1rem 1rem 0rem 1rem;
+  padding: 1.3rem 1rem 0rem 1rem;
 `
 
 export default withRouter(Dashboard)
