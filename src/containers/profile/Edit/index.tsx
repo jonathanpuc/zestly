@@ -3,12 +3,13 @@ import NavHeader from '../../../components/general/NavHeader'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import ProfilePhotoGrid from '../../../components/profile/ProfilePhotoGrid'
 import styled from 'styled-components'
-import love from '../../../img/icons/love.svg'
-import people from '../../../img/icons/people.svg'
+
 import plus from '../../../img/icons/plus.svg'
 import instagram from '../../../img/icons/instagram.png'
 import tick from '../../../img/icons/tick.svg'
 import ButtonStyle from '../../../components/styles/Button'
+import SeekingTag from '../SeekingTag'
+
 
 interface IProfileEditProps extends RouteComponentProps<{}> {
   backPage: boolean
@@ -18,15 +19,17 @@ interface IProfileEditProps extends RouteComponentProps<{}> {
 }
 
 interface IProfileEditState {
-  aboutMe: string
+  aboutMe: string,
+  seeking: string[]
 }
 
 class ProfileEdit extends React.Component<
   IProfileEditProps,
   IProfileEditState
-> {
+  > {
   public state = {
-    aboutMe: ''
+    aboutMe: '',
+    seeking: []
   }
   public confirmChanges = () => {
     console.log('changes confirmed')
@@ -38,6 +41,17 @@ class ProfileEdit extends React.Component<
 
   public handleAboutMe = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({ aboutMe: e.target.value })
+  }
+
+  public handleSeekingButtonClick = (type: string) => {
+    const seeking: string[] = [...this.state.seeking]
+    // @ts-ignore
+    if (seeking.includes(type)) {
+      this.setState({ ...this.state, seeking: seeking.filter(t => t !== type) })
+    } else {
+      seeking.push(type)
+      this.setState({ ...this.state, seeking })
+    }
   }
   public render() {
     return (
@@ -72,14 +86,16 @@ class ProfileEdit extends React.Component<
           <p>Select one or both</p>
 
           <div>
-            <SeekingTag>
-              <img src={love} alt="relationship" />
-              <p>Relationship</p>
-            </SeekingTag>
-            <SeekingTag>
-              <img src={people} alt="friends" />
-              <p>Friends</p>
-            </SeekingTag>
+            <SeekingTag
+              type='relationship'
+              seeking={this.state.seeking}
+              onTagClick={this.handleSeekingButtonClick}
+            />
+            <SeekingTag
+              type='friends'
+              seeking={this.state.seeking}
+              onTagClick={this.handleSeekingButtonClick}
+            />
           </div>
         </SeekingBlock>
 
@@ -104,6 +120,8 @@ class ProfileEdit extends React.Component<
     )
   }
 }
+
+
 
 export default withRouter(ProfileEdit)
 
@@ -146,7 +164,7 @@ const InputBlock = styled.div`
   }
 `
 
-const AboutMeBlock = styled(InputBlock)`
+const AboutMeBlock = styled(InputBlock) `
   margin-top: 50px;
   > div {
     position: relative;
@@ -163,7 +181,7 @@ const AboutMeBlock = styled(InputBlock)`
   }
 `
 
-const SeekingBlock = styled(InputBlock)`
+const SeekingBlock = styled(InputBlock) `
   label {
     margin-bottom: 0px;
   }
@@ -185,21 +203,9 @@ const SeekingBlock = styled(InputBlock)`
   }
 `
 
-const SeekingTag = styled.div`
-  padding: 0px 14px;
-  font-size: 1.4rem;
-  height: 3.6rem;
-  border-radius: 18px;
-  background-color: ${props => props.theme.offwhite};
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  img {
-    margin-right: 5px;
-  }
-`
 
-const InstagramBlock = styled(InputBlock)`
+
+const InstagramBlock = styled(InputBlock) `
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: 0px;

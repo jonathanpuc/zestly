@@ -438,7 +438,7 @@ const Heart: React.SFC<IIconProps> = (props: IIconProps) => {
                                 <use xlinkHref="#heart-path" />
                             </mask>
                             <use id="Mask" fill="#B6486D" xlinkHref="#heart-path" />
-                            <g id="-Colours-/-shades-/-68" mask="url(#heart-mask)" fill="#ACACAC">
+                            <g id="-Colours-/-shades-/-68" mask="url(#heart-mask)" fill={props.color}>
                                 <g transform="translate(-3.000000, -4.000000)" id="Rectangle-2-Copy-5">
                                     <rect x="0" y="0" width="24" height="24" rx="4" />
                                 </g>
