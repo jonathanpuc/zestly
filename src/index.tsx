@@ -5,6 +5,11 @@ import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { theme } from './theme'
+import Amplify from 'aws-amplify'
+import configuration from './aws-exports'
+import appsyncConfig from './appsync'
+
+Amplify.configure({ ...configuration, ...appsyncConfig })
 
 import createHistory from 'history/createBrowserHistory'
 
