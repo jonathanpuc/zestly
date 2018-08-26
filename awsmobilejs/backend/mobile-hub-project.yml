@@ -16,15 +16,15 @@ features:
     components:
       sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
         attributes:
-          alias-attributes:
-            - email
           mfa-configuration: OFF
           name: userpool
           password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
-            min-length: 8
+            min-length: '8'
             require-lower-case: true
             require-numbers: false
             require-symbols: false
             require-upper-case: true
+          standard-attributes: '["email"]'
+          username-attributes: '["email"]'
 name: zestly
 region: ap-southeast-2

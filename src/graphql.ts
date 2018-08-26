@@ -1,15 +1,17 @@
 export const CreateUser = `
 mutation CreateUser(
+    $uuid: String!
 	$meets: [String]
 	$attending: [String]
-	$profile: UserProfileInput!
+	$profile: UserProfileInput
  ) {
     createUser(input: {
+        uuid: $uuid
         meets: $meets
         attending: $attending
         profile: $profile
     }) {
-      id
+      uuid
       profile {
         name
         name
@@ -32,13 +34,13 @@ mutation CreateUser(
 
 export const UpdateUser = `
 mutation UpdateUser(
-	$id: ID!
+	$uuid: String!
 	$profile: UserProfileInput
 	$meets: [String]
 	$attending: [String]
 ) {
     updateUser(input: {
-        id: $id
+        uuid: $uuid
         profile: $profile
         meets: $meets
         attending: $attending
@@ -65,9 +67,9 @@ mutation UpdateUser(
 
 export const GetUser = `
 query GetUser (
-    $id: ID!
+    $uuid: String!
 ) {
-    getUser(id: $id) {
+    getUser(uuid: $uuid) {
         profile {
             name
             name
@@ -90,10 +92,10 @@ query GetUser (
 
 export const DeleteUser = `
 mutation DeleteUser(
-    $id: ID!
+    $uuid: String!
 ) {
-    deleteUser(input: {id: $id}) {
-        id
+    deleteUser(input: {uuid: $uuid}) {
+        uuid
         meets
         attending
     }
@@ -107,28 +109,28 @@ export const ListUsers = `
     ) {
         listUsers(limit: $limit, nextToken: $nextToken) {
             items {
-                id
+                uuid
             }
             nextToken
         }
     }
 `
 
-// page cant be refreshed otherwise token becomes invalid
+// page cant be refreshed otherwise token becomes invaluuid
 // const queryUsers = {
 //     limit: 1,
 //     // nextToken: "eyJ2ZXJzaW9uIjoxLCJ0b2tlbiI6IkFRSUNBSGcxTUkwMVp2Vj…KMWsxU1FvTmNZb3J4V2pwb3Zob3ByOFF0UWJRTWtFeUE9PSJ9"
 // }
 
   // const deleteQ = {
-  //   id: '3fa6c0e9-b81b-4dc3-b497-c48b26849632'
+  //   uuid: '3fa6c0e9-b81b-4dc3-b497-c48b26849632'
   // }
   // const queryUser = {
-  //   id: '3fa6c0e9-b81b-4dc3-b497-c48b26849632'
+  //   uuid: '3fa6c0e9-b81b-4dc3-b497-c48b26849632'
   // }
 
   // const update = {
-  //   id: '3fa6c0e9-b81b-4dc3-b497-c48b26849632',
+  //   uuid: '3fa6c0e9-b81b-4dc3-b497-c48b26849632',
   //   profile: {
   //     name: 'Fry',
   //     location: 'String',
