@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components'
 import ButtonStyle from '../../components/styles/Button'
 
+import { Auth } from 'aws-amplify'
+
 // helpers
 import { validateEmail } from '../../helpers/validators'
 
@@ -10,7 +12,9 @@ import LoginRegisterButton from '../../components/auth/Buttons'
 interface IEmailLoginState {
     showing: string,
     email: string,
-    password: string
+    password: string,
+    awaitingSignupCode: boolean,
+    signupCode: string
 }
 
 export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
@@ -18,7 +22,9 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
     public state = {
         showing: 'login',
         email: '',
-        password: ''
+        password: '',
+        awaitingSignupCode: false,
+        signupCode: ''
     }
 
     public handleAuthStateChange = (type: string) => {
@@ -33,12 +39,33 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
         this.setState({ password: e.target.value })
     }
 
-    public handleFormSubmission = (e: React.FormEvent<EventTarget>) => {
+    public handleSignupCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ signupCode: e.target.value })
+    }
+
+    public handleFormSubmission = async (e: React.FormEvent<EventTarget>) => {
         e.preventDefault()
         if (this.state.showing === 'login') {
             // do login stuff
+        } else if (this.state.showing === 'signup' && this.state.signupCode) {
+
+            try {
+                const res = await Auth.confirmSignUp(this.state.email, this.state.signupCode)
+                console.log(res)
+            } catch (e) {
+                console.log(e)
+            }
         } else {
-            // do signup stuff
+            try {
+                const res = await Auth.signUp({
+                    username: this.state.email,
+                    password: this.state.password
+                })
+                console.log(res)
+                this.setState({ awaitingSignupCode: true })
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
 
@@ -53,30 +80,42 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
     }
 
 
+
+
+
     public render() {
         return (
             <Outer>
                 <LoginRegisterButton onClick={this.handleAuthStateChange} />
                 {this.renderMessage()}
                 <Form onSubmit={this.handleFormSubmission}>
+                    {this.state.awaitingSignupCode ?
+                        <React.Fragment>
+                            <ConfirmationMessage>We've sent you a confirmation code, please enter it below.</ConfirmationMessage>
+                            <ConfirmationCode onChange={this.handleSignupCodeChange} value={this.state.signupCode} />
+                        </React.Fragment>
+                        :
+                        (<React.Fragment>
+                            <Email
+                                type="email"
+                                onChange={this.handleEmailChange}
+                                value={this.state.email}
+                                placeholder="Email Address"
+                                id="email"
+                                required={true} />
+                            <label htmlFor="email">Email address</label>
 
-                    <Email
-                        type="email"
-                        onChange={this.handleEmailChange}
-                        value={this.state.email}
-                        placeholder="Email Address"
-                        id="email"
-                        required={true} />
-                    <label htmlFor="email">Email address</label>
-
-                    <Password
-                        type="password"
-                        onChange={this.handlePasswordChange}
-                        value={this.state.password}
-                        placeholder="Password"
-                        id="password"
-                        required={true} />
-                    <label htmlFor="password">Password</label>
+                            <Password
+                                type="password"
+                                onChange={this.handlePasswordChange}
+                                value={this.state.password}
+                                placeholder="Password"
+                                id="password"
+                                required={true} />
+                            <label htmlFor="password">Password</label>
+                        </React.Fragment>
+                        )
+                    }
                     <SubmitButton type="submit" disabled={!this.validateForm()}>{this.state.showing}</SubmitButton>
                 </Form>
             </Outer>
@@ -118,6 +157,15 @@ const Password = styled.input`
     border-radius: 0 0 4px 4px;
     border-top: none;
     margin-top: -26px;
+`
+
+const ConfirmationCode = styled.input`
+    border-radius: 4px;
+`
+
+const ConfirmationMessage = styled.p`
+    margin-bottom: 10px;
+    max-width: 80%;
 `
 
 const SubmitButton = ButtonStyle.extend`

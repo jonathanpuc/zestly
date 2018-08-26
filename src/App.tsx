@@ -15,7 +15,7 @@ interface IState {
 class App extends React.Component<{}, IState> {
 
   public state = {
-    authenticated: true,
+    authenticated: false,
   }
 
   public componentDidMount() {
