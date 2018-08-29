@@ -89,6 +89,8 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
                     // user hasn't completed onboarding
                     if (profile.name === null) {
                         this.props.history.push('/onboarding')
+                    } else {
+                        // dispatch action authSuccess
                     }
                 } catch (e) {
                     console.log(e)
