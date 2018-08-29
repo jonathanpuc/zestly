@@ -1,28 +1,66 @@
 import * as React from 'react';
 import styled from 'styled-components'
 import ButtonStyle from '../../components/styles/Button'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { Auth } from 'aws-amplify'
+
+import { CreateUser, GetUser } from '../../graphql'
+
+import { API, graphqlOperation } from 'aws-amplify'
 
 // helpers
 import { validateEmail } from '../../helpers/validators'
 
 import LoginRegisterButton from '../../components/auth/Buttons'
 
+/**
+ * @todo need to create action to switch authenticated to true,
+ * right now onboarding requires user to be authed otherwise redirected
+ */
+
+
+interface IEmailLoginProps extends RouteComponentProps<{}> {
+
+}
 interface IEmailLoginState {
     showing: string,
     email: string,
-    password: string
+    password: string,
+    awaitingSignupCode: boolean,
+    signupCode: string,
+    error: string
 }
 
-export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
+class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
 
     public state = {
         showing: 'login',
         email: '',
-        password: ''
+        password: '',
+        awaitingSignupCode: false,
+        signupCode: '',
+        error: ''
+    }
+
+    public createUser = async (uuid: string) => {
+        const params = {
+            uuid,
+            profile: {},
+            meets: [],
+            attending: []
+        }
+
+        try {
+            const res = await API.graphql(graphqlOperation(CreateUser, params))
+            console.log(res)
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 
     public handleAuthStateChange = (type: string) => {
-        this.setState({ showing: type, password: '' })
+        this.setState({ showing: type, password: '', error: '' })
     }
 
     public handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,12 +71,60 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
         this.setState({ password: e.target.value })
     }
 
-    public handleFormSubmission = (e: React.FormEvent<EventTarget>) => {
+    public handleSignupCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ signupCode: e.target.value })
+    }
+
+    public handleFormSubmission = async (e: React.FormEvent<EventTarget>) => {
         e.preventDefault()
         if (this.state.showing === 'login') {
-            // do login stuff
+
+            try {
+                const user = await Auth.signIn(this.state.email, this.state.password)
+
+                try {
+                    const res: any = await API.graphql(graphqlOperation(GetUser, { uuid: user.username }))
+                    console.log(res)
+                    const { profile } = res.data.getUser
+                    // user hasn't completed onboarding
+                    if (profile.name === null) {
+                        this.props.history.push('/onboarding')
+                    } else {
+                        // dispatch action authSuccess
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            } catch (e) {
+                this.setState({ error: e.message })
+            }
+
+        } else if (this.state.showing === 'signup' && this.state.signupCode) {
+
+            try {
+                const res = await Auth.confirmSignUp(this.state.email, this.state.signupCode)
+                console.log(res)
+            } catch (e) {
+                console.log(e)
+            }
         } else {
-            // do signup stuff
+            try {
+                const res = await Auth.signUp({
+                    username: this.state.email,
+                    password: this.state.password
+                })
+                console.log(res)
+                this.setState({ awaitingSignupCode: true })
+                this.props.history.push('/onboarding')
+            } catch (e) {
+                if (e.message.toLowerCase().includes('password')) {
+                    this.setState({ error: 'Please ensure your password is at least 8 characters long with an uppercase character.' })
+                } else {
+                    this.setState({ error: e.message })
+                }
+                console.log(e)
+            }
         }
     }
 
@@ -49,8 +135,11 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
     )
 
     public validateForm() {
-        return validateEmail(this.state.email) && this.state.password.length > 0 ? true : false
+        return validateEmail(this.state.email) && this.state.password.length >= 8 ? true : false
     }
+
+
+
 
 
     public render() {
@@ -59,24 +148,34 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
                 <LoginRegisterButton onClick={this.handleAuthStateChange} />
                 {this.renderMessage()}
                 <Form onSubmit={this.handleFormSubmission}>
+                    {this.state.awaitingSignupCode ?
+                        <React.Fragment>
+                            <ConfirmationMessage>We've sent you a confirmation code, please enter it below.</ConfirmationMessage>
+                            <ConfirmationCode onChange={this.handleSignupCodeChange} value={this.state.signupCode} />
+                        </React.Fragment>
+                        :
+                        (<React.Fragment>
+                            <Email
+                                type="email"
+                                onChange={this.handleEmailChange}
+                                value={this.state.email}
+                                placeholder="Email Address"
+                                id="email"
+                                required={true} />
+                            <label htmlFor="email">Email address</label>
 
-                    <Email
-                        type="email"
-                        onChange={this.handleEmailChange}
-                        value={this.state.email}
-                        placeholder="Email Address"
-                        id="email"
-                        required={true} />
-                    <label htmlFor="email">Email address</label>
-
-                    <Password
-                        type="password"
-                        onChange={this.handlePasswordChange}
-                        value={this.state.password}
-                        placeholder="Password"
-                        id="password"
-                        required={true} />
-                    <label htmlFor="password">Password</label>
+                            <Password
+                                type="password"
+                                onChange={this.handlePasswordChange}
+                                value={this.state.password}
+                                placeholder="Password"
+                                id="password"
+                                required={true} />
+                            <label htmlFor="password">Password</label>
+                        </React.Fragment>
+                        )
+                    }
+                    <Error>{this.state.error && this.state.error}</Error>
                     <SubmitButton type="submit" disabled={!this.validateForm()}>{this.state.showing}</SubmitButton>
                 </Form>
             </Outer>
@@ -84,8 +183,18 @@ export default class EmailLogin extends React.Component<{}, IEmailLoginState> {
     }
 }
 
+export default withRouter(EmailLogin)
+
 const Outer = styled.div`
     padding-top: 3rem;
+`
+
+const Error = styled.div`
+    font-weight: 500;
+    color: ${props => props.theme.red};
+    text-align: center;
+    font-size: 14px;
+    max-width: 75%;
 `
 
 const Message = styled.div`
@@ -118,6 +227,15 @@ const Password = styled.input`
     border-radius: 0 0 4px 4px;
     border-top: none;
     margin-top: -26px;
+`
+
+const ConfirmationCode = styled.input`
+    border-radius: 4px;
+`
+
+const ConfirmationMessage = styled.p`
+    margin-bottom: 10px;
+    max-width: 80%;
 `
 
 const SubmitButton = ButtonStyle.extend`

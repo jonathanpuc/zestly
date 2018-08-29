@@ -6,17 +6,16 @@ import './App.css';
 import Routes from './Routes'
 
 interface IState {
-  authenticated: boolean
+  authenticated: boolean,
 }
 
 class App extends React.Component<{}, IState> {
 
   public state = {
-    authenticated: true
+    authenticated: false,
   }
 
   public componentDidMount() {
-
   }
 
   public handleClick = () => {
