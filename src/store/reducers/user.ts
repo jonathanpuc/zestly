@@ -51,6 +51,8 @@ const reducer = (state: IInitialState = initialState, action: any) => {
                 ...state,
                 ...action.payload
             }
+        default:
+            return state
     }
 }
 

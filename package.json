@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/prop-types": "^15.5.4",
     "@types/rc-slider": "^8.2.5",
+    "@types/react-redux": "^6.0.6",
     "@types/react-router-dom": "^4.3.0",
     "@types/react-slick": "^0.23.1",
     "aws-amplify": "^1.0.6",
