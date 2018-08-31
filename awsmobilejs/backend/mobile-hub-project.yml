@@ -26,5 +26,9 @@ features:
             require-upper-case: true
           standard-attributes: '["email"]'
           username-attributes: '["email"]'
+  user-files: !com.amazonaws.mobilehub.v0.UserFiles 
+    attributes:
+      enabled: true
+      wildcard-cors-policy: true
 name: zestly
 region: ap-southeast-2

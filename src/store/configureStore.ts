@@ -1,31 +1,32 @@
-// import { createStore, applyMiddleware, compose } from "redux";
-// import createSagaMiddleware from 'redux-saga';
-// import { routerMiddleware } from 'connected-react-router';
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from 'redux-saga';
+import { createBrowserHistory } from 'history'
+import rootSaga from './sagas/index'
+import { rootReducer } from './reducers/index'
 
-// import { rootHistory } from './history';
-// import rootSaga from './sagas/index';
-// import { rootReducer } from './reducers/index';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 
+export const history = createBrowserHistory()
 
-// const sagaMiddleware = createSagaMiddleware();
-// const reduxRouterMiddleware = routerMiddleware(rootHistory);
+const sagaMiddleware = createSagaMiddleware()
 
-// let store;
-// let middleware = [sagaMiddleware, reduxRouterMiddleware];
+let store: any
 
-// let quote = localStorage.getItem('navy-quote');
-// let initialState = quote !== null ? { quote: JSON.parse(quote) } : {};
+const cachedData = localStorage.getItem('zestly')
+const initialState = cachedData !== null ? cachedData : {}
 
-// const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-
-//   store = createStore(
-//     rootReducer,
-//     initialState,
-//     compose(applyMiddleware(...middleware))
-//   );
+const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
-// sagaMiddleware.run(rootSaga);
+store = createStore(
+    connectRouter(history)(rootReducer),
+    initialState,
+    composeEnhancer(applyMiddleware(routerMiddleware(history), sagaMiddleware))
+);
 
-// export default store;
+
+
+
+sagaMiddleware.run(rootSaga);
+
+export default store;

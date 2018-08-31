@@ -1,19 +1,13 @@
 import * as React from 'react';
-// import styled from 'styled-components'
-import './App.css';
-
-
+import { connect } from 'react-redux'
 import Routes from './Routes'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
-interface IState {
-  authenticated: boolean,
+interface IProps extends RouteComponentProps<{}>, IStateProps {
+
 }
 
-class App extends React.Component<{}, IState> {
-
-  public state = {
-    authenticated: false,
-  }
+class App extends React.Component<IProps, {}> {
 
   public componentDidMount() {
   }
@@ -26,13 +20,21 @@ class App extends React.Component<{}, IState> {
   public render() {
     return (
       <div className="App">
-        <Routes authenticated={this.state.authenticated} />
+        <Routes authenticated={this.props.authenticated} />
       </div>
     );
   }
 }
 
-export default App
+interface IStateProps {
+  authenticated: boolean
+}
+
+const mapStateToProps = (state: any) => ({
+  authenticated: state.user.auth
+})
+
+export default withRouter(connect(mapStateToProps, null)(App))
 
 
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import ButtonStyle from '../../components/styles/Button'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
@@ -12,6 +13,7 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { validateEmail } from '../../helpers/validators'
 
 import LoginRegisterButton from '../../components/auth/Buttons'
+import { authSuccess, loadUser } from '../../store/actions/user'
 
 /**
  * @todo need to create action to switch authenticated to true,
@@ -19,7 +21,7 @@ import LoginRegisterButton from '../../components/auth/Buttons'
  */
 
 
-interface IEmailLoginProps extends RouteComponentProps<{}> {
+interface IEmailLoginProps extends RouteComponentProps<{}>, IDispatchProps {
 
 }
 interface IEmailLoginState {
@@ -84,6 +86,7 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
 
                 try {
                     const res: any = await API.graphql(graphqlOperation(GetUser, { uuid: user.username }))
+                    this.props.authSuccess()
                     console.log(res)
                     const { profile } = res.data.getUser
                     // user hasn't completed onboarding
@@ -183,7 +186,18 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
     }
 }
 
-export default withRouter(EmailLogin)
+interface IDispatchProps {
+    authSuccess: () => any
+    loadUser: (data: any) => any
+}
+
+// interface IStateProps {
+
+// }
+
+
+
+export default withRouter(connect(null, { authSuccess, loadUser })((EmailLogin)))
 
 const Outer = styled.div`
     padding-top: 3rem;
