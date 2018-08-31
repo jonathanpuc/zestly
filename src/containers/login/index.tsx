@@ -4,14 +4,36 @@ import EmailLoginInterface from './EmailLogin'
 import NavHeader from '../../components/general/NavHeader'
 import logo from '../../img/logo.svg'
 import homeBG from './home.png'
+import { withFederated } from 'aws-amplify-react';
+import { Auth } from 'aws-amplify'
 interface IState {
     emailAuth: boolean
+    authed: boolean
 }
 
-export default class Login extends React.Component<{}, IState> {
+interface IProps {
+    facebookSignIn: () => void
+}
+
+export default class Login extends React.Component<IProps, IState> {
+
+
     public state = {
-        emailAuth: false
+        emailAuth: false,
+        authed: false
     }
+
+    public componentDidMount() {
+
+        // const
+        // Auth.federatedSignIn('facebook', { token, expires_at: expires}, { name: 'USER_NAME' })
+        // .then(credentials => {
+        //   console.log('get aws credentials', credentials);
+        // }).catch(e => {
+        //   console.log(e);
+        // });
+    }
+
 
     public switchToEmail = (): void => {
         this.setState({ emailAuth: true })
@@ -21,41 +43,80 @@ export default class Login extends React.Component<{}, IState> {
         this.setState({ emailAuth: false })
     }
 
-    public renderMain = (): React.ReactElement<'div'> => {
-        return (
-            <MainOuter>
-                <Banner>
-                    <img src={logo} alt="zestly logo" />
-                </Banner>
-                <MainInterface>
-                    <h2>Share experiences. <span>Meet new people.</span></h2>
-                    <SocialButtons>
-                        <SocialButton>Sign in with Facebook</SocialButton>
-                        <div>
-                            <SocialButton type='google'>Sign in with Google</SocialButton>
-                            <p>We'll <span>never</span> post with your permission.</p>
-                        </div>
-                    </SocialButtons>
-
-                    <EmailLogin>login with an <span onClick={this.switchToEmail}>email</span></EmailLogin>
-
-                </MainInterface>
-            </MainOuter>
-        )
+    public facebookSignIn = (): void => {
+        this.props.facebookSignIn()
     }
 
+    public handleAuthStageChange = (e: any) => {
+        console.log(e)
+        if (e === 'signedIn') {
+            this.setState({ authed: true })
+            Auth.currentAuthenticatedUser().then(user => console.log(user))
+            Auth.currentUserInfo().then(user => console.log(user))
+        }
+    }
+
+
+
     public render() {
+
+
+
+
+
+        const renderMain = (): React.ReactElement<'div'> => {
+            return (
+                <MainOuter>
+                    <Banner>
+                        <img src={logo} alt="zestly logo" />
+                    </Banner>
+                    <MainInterface>
+                        <h2>Share experiences. <span>Meet new people.</span></h2>
+
+                        <Federated federated={federated} onStateChange={this.handleAuthStageChange} />
+                        <EmailLogin>login with an <span onClick={this.switchToEmail}>email</span></EmailLogin>
+
+                    </MainInterface>
+                </MainOuter>
+            )
+        }
+
         return (
             <Outer>
+                <p>{this.state.authed ? 'True' : 'False'}</p>
 
                 {
-                    this.state.emailAuth ? <React.Fragment><NavHeader backPage={this.state.emailAuth} onBackClick={this.handleBackClick} /><EmailLoginInterface /></React.Fragment> : this.renderMain()
+                    this.state.emailAuth ? <React.Fragment><NavHeader backPage={this.state.emailAuth} onBackClick={this.handleBackClick} /><EmailLoginInterface /></React.Fragment> : renderMain()
                 }
             </Outer>
 
         )
     }
 }
+
+const Buttons = (props: any) => (
+    <SocialButtons>
+        <SocialButton onClick={props.facebookSignIn}>Sign in with Facebook</SocialButton>
+        <div>
+            <SocialButton type='google' onClick={props.googleSignIn}>Sign in with Google</SocialButton>
+            <p>We'll <span>never</span> post with your permission.</p>
+        </div>
+    </SocialButtons>
+
+)
+
+
+
+const federated = {
+    google_client_id: '346584850779-35rlioghlcj7oj96s5777pg4un7gvpne.apps.googleusercontent.com',
+    facebook_app_id: '302960233813320',
+    amazon_client_id: ''
+};
+
+
+const Federated = withFederated(Buttons)
+
+
 
 const Outer = styled.div`
 `
