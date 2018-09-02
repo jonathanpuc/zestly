@@ -39,7 +39,7 @@ const NavHeader: React.SFC<IProps> = props => {
   const actionIcon = props.action ? actionIconReducer[props.action.type] : ''
 
   return (
-    <Outer fill={props.fill} paddingTop={props.paddingTop || false}>
+    <Outer fill={props.fill ? 'true' : 'false'} paddingTop={props.paddingTop || false}>
       {props.backPage && (
         <BackArrow>
           <img onClick={handleBackClick} src={arrowLeft} alt="go back" />
@@ -76,7 +76,7 @@ const Outer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   padding: ${(props: any) => props.paddingTop ? '1.7rem 1rem 1rem 1rem' : '0.70rem 1rem 1rem 1rem'};
-  background-color: ${(props: any) => (props.fill ? '#fff' : 'inherit')};
+  background-color: ${(props: any) => (props.fill === 'true' ? '#fff' : 'inherit')};
   img {
     cursor: pointer;
   }

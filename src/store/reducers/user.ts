@@ -1,6 +1,5 @@
 import { AUTH_SUCCESS, USER_DATA_LOADED } from '../actions/types'
 
-
 interface IInitialState {
     attending: string[],
     meets: string[],
@@ -51,6 +50,8 @@ const reducer = (state: IInitialState = initialState, action: any) => {
                 ...state,
                 ...action.payload
             }
+        default:
+            return state
     }
 }
 

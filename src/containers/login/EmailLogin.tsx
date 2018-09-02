@@ -1,17 +1,19 @@
 import * as React from 'react';
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import ButtonStyle from '../../components/styles/Button'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 
-import { CreateUser, GetUser } from '../../graphql'
-
+import { CreateUser } from '../../graphql'
+// GetUser
 import { API, graphqlOperation } from 'aws-amplify'
 
 // helpers
 import { validateEmail } from '../../helpers/validators'
 
 import LoginRegisterButton from '../../components/auth/Buttons'
+import { authSuccess, loadUser } from '../../store/actions/user'
 
 /**
  * @todo need to create action to switch authenticated to true,
@@ -19,7 +21,7 @@ import LoginRegisterButton from '../../components/auth/Buttons'
  */
 
 
-interface IEmailLoginProps extends RouteComponentProps<{}> {
+interface IEmailLoginProps extends RouteComponentProps<{}>, IDispatchProps {
 
 }
 interface IEmailLoginState {
@@ -78,23 +80,8 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
     public handleFormSubmission = async (e: React.FormEvent<EventTarget>) => {
         e.preventDefault()
         if (this.state.showing === 'login') {
-
             try {
-                const user = await Auth.signIn(this.state.email, this.state.password)
-
-                try {
-                    const res: any = await API.graphql(graphqlOperation(GetUser, { uuid: user.username }))
-                    console.log(res)
-                    const { profile } = res.data.getUser
-                    // user hasn't completed onboarding
-                    if (profile.name === null) {
-                        this.props.history.push('/onboarding')
-                    } else {
-                        // dispatch action authSuccess
-                    }
-                } catch (e) {
-                    console.log(e)
-                }
+                this.props.authSuccess('email')
 
             } catch (e) {
                 this.setState({ error: e.message })
@@ -103,20 +90,18 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
         } else if (this.state.showing === 'signup' && this.state.signupCode) {
 
             try {
-                const res = await Auth.confirmSignUp(this.state.email, this.state.signupCode)
-                console.log(res)
+                await Auth.confirmSignUp(this.state.email, this.state.signupCode)
+                this.props.authSuccess('email')
             } catch (e) {
                 console.log(e)
             }
         } else {
             try {
-                const res = await Auth.signUp({
+                await Auth.signUp({
                     username: this.state.email,
                     password: this.state.password
                 })
-                console.log(res)
                 this.setState({ awaitingSignupCode: true })
-                this.props.history.push('/onboarding')
             } catch (e) {
                 if (e.message.toLowerCase().includes('password')) {
                     this.setState({ error: 'Please ensure your password is at least 8 characters long with an uppercase character.' })
@@ -183,7 +168,18 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
     }
 }
 
-export default withRouter(EmailLogin)
+interface IDispatchProps {
+    authSuccess: (authType: string) => any
+    loadUser: (data: any) => any
+}
+
+// interface IStateProps {
+
+// }
+
+
+
+export default withRouter(connect(null, { authSuccess, loadUser })((EmailLogin)))
 
 const Outer = styled.div`
     padding-top: 3rem;
