@@ -1,37 +1,32 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import EmailLoginInterface from './EmailLogin'
 import NavHeader from '../../components/general/NavHeader'
 import logo from '../../img/logo.svg'
 import homeBG from './home.png'
 import { withFederated } from 'aws-amplify-react';
-import { Auth } from 'aws-amplify'
+// import { Auth, API, graphqlOperation } from 'aws-amplify'
+// import { CreateUser, GetUser } from '../../graphql'
+import { authSuccess } from '../../store/actions/user'
+// , 
 interface IState {
     emailAuth: boolean
-    authed: boolean
 }
 
-interface IProps {
+interface IProps extends IDispatchProps {
     facebookSignIn: () => void
 }
 
-export default class Login extends React.Component<IProps, IState> {
+class Login extends React.Component<IProps, IState> {
 
 
     public state = {
-        emailAuth: false,
-        authed: false
+        emailAuth: false
     }
 
     public componentDidMount() {
 
-        // const
-        // Auth.federatedSignIn('facebook', { token, expires_at: expires}, { name: 'USER_NAME' })
-        // .then(credentials => {
-        //   console.log('get aws credentials', credentials);
-        // }).catch(e => {
-        //   console.log(e);
-        // });
     }
 
 
@@ -47,12 +42,11 @@ export default class Login extends React.Component<IProps, IState> {
         this.props.facebookSignIn()
     }
 
-    public handleAuthStageChange = (e: any) => {
-        console.log(e)
+    public handleAuthStageChange = async (e: any) => {
+
         if (e === 'signedIn') {
-            this.setState({ authed: true })
-            Auth.currentAuthenticatedUser().then(user => console.log(user))
-            Auth.currentUserInfo().then(user => console.log(user))
+
+            this.props.authSuccess('social')
         }
     }
 
@@ -83,8 +77,6 @@ export default class Login extends React.Component<IProps, IState> {
 
         return (
             <Outer>
-                <p>{this.state.authed ? 'True' : 'False'}</p>
-
                 {
                     this.state.emailAuth ? <React.Fragment><NavHeader backPage={this.state.emailAuth} onBackClick={this.handleBackClick} /><EmailLoginInterface /></React.Fragment> : renderMain()
                 }
@@ -115,6 +107,12 @@ const federated = {
 
 
 const Federated = withFederated(Buttons)
+
+
+interface IDispatchProps {
+    authSuccess: (authType: string) => any
+}
+export default connect(null, { authSuccess })(Login)
 
 
 

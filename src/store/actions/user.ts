@@ -26,8 +26,9 @@ export const loadUser = (payload: any) => {
     }
 }
 
-export const authSuccess = () => {
+export const authSuccess = (authType: string) => {
     return {
-        type: AUTH_SUCCESS
+        type: AUTH_SUCCESS,
+        payload: authType
     }
 }
