@@ -1,6 +1,5 @@
 import { AUTH_SUCCESS, USER_DATA_LOADED } from '../actions/types'
 
-
 interface IInitialState {
     attending: string[],
     meets: string[],
