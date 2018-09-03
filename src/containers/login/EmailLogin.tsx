@@ -5,15 +5,12 @@ import ButtonStyle from '../../components/styles/Button'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 
-import { CreateUser } from '../../graphql'
-// GetUser
-import { API, graphqlOperation } from 'aws-amplify'
 
 // helpers
 import { validateEmail } from '../../helpers/validators'
 
 import LoginRegisterButton from '../../components/auth/Buttons'
-import { authSuccess, loadUser } from '../../store/actions/user'
+import { handleAuth } from '../../store/actions/user'
 
 /**
  * @todo need to create action to switch authenticated to true,
@@ -44,23 +41,6 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
         error: ''
     }
 
-    public createUser = async (uuid: string) => {
-        const params = {
-            uuid,
-            profile: {},
-            meets: [],
-            attending: []
-        }
-
-        try {
-            const res = await API.graphql(graphqlOperation(CreateUser, params))
-            console.log(res)
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
-
     public handleAuthStateChange = (type: string) => {
         this.setState({ showing: type, password: '', error: '' })
     }
@@ -81,7 +61,7 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
         e.preventDefault()
         if (this.state.showing === 'login') {
             try {
-                this.props.authSuccess('email')
+                this.props.handleAuth('email')
 
             } catch (e) {
                 this.setState({ error: e.message })
@@ -91,7 +71,9 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
 
             try {
                 await Auth.confirmSignUp(this.state.email, this.state.signupCode)
-                this.props.authSuccess('email')
+                await Auth.signIn(this.state.email, this.state.password)
+
+                this.props.handleAuth('email')
             } catch (e) {
                 console.log(e)
             }
@@ -169,8 +151,7 @@ class EmailLogin extends React.Component<IEmailLoginProps, IEmailLoginState> {
 }
 
 interface IDispatchProps {
-    authSuccess: (authType: string) => any
-    loadUser: (data: any) => any
+    handleAuth: (authType: string) => any
 }
 
 // interface IStateProps {
@@ -179,7 +160,7 @@ interface IDispatchProps {
 
 
 
-export default withRouter(connect(null, { authSuccess, loadUser })((EmailLogin)))
+export default withRouter(connect(null, { handleAuth })((EmailLogin)))
 
 const Outer = styled.div`
     padding-top: 3rem;

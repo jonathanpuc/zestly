@@ -1,2 +1,3 @@
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const USER_DATA_LOADED = 'USER_DATA_LOADED'
+export const HANDLE_AUTH = 'HANDLE_AUTH'

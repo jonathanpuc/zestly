@@ -6,10 +6,8 @@ import NavHeader from '../../components/general/NavHeader'
 import logo from '../../img/logo.svg'
 import homeBG from './home.png'
 import { withFederated } from 'aws-amplify-react';
-// import { Auth, API, graphqlOperation } from 'aws-amplify'
-// import { CreateUser, GetUser } from '../../graphql'
-import { authSuccess } from '../../store/actions/user'
-// , 
+import { handleAuth } from '../../store/actions/user'
+
 interface IState {
     emailAuth: boolean
 }
@@ -46,7 +44,7 @@ class Login extends React.Component<IProps, IState> {
 
         if (e === 'signedIn') {
 
-            this.props.authSuccess('social')
+            this.props.handleAuth('social')
         }
     }
 
@@ -110,9 +108,9 @@ const Federated = withFederated(Buttons)
 
 
 interface IDispatchProps {
-    authSuccess: (authType: string) => any
+    handleAuth: (authType: string) => any
 }
-export default connect(null, { authSuccess })(Login)
+export default connect(null, { handleAuth })(Login)
 
 
 

@@ -22,14 +22,15 @@ interface IProps extends RouteComponentProps<{}>, IStateProps {
 class Dashboard extends React.Component<IProps, {}> {
 
   public async componentDidMount() {
+
     if (this.props.authenticated) {
       console.log('mounted')
       const userDetails = await Auth.currentAuthenticatedUser()
       console.log(userDetails, 'dashboard')
 
-      const uuid = userDetails.id
+      const uuid = userDetails.id ? userDetails.id : userDetails.username
       const res: any = await API.graphql(graphqlOperation(GetUser, { uuid }))
-
+      console.log(res)
       const { profile } = res.data.getUser
       console.log(profile)
       // user hasn't completed onboarding

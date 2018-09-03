@@ -2,7 +2,7 @@
 import { put, call } from 'redux-saga/effects'
 import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { CreateUser, GetUser } from '../../graphql'
-import { USER_DATA_LOADED } from '../actions/types'
+import { USER_DATA_LOADED, AUTH_SUCCESS } from '../actions/types'
 
 
 async function getAuthedUserDetails() {
@@ -28,22 +28,30 @@ export function* handleAuth(action: any) {
     console.log(userData)
 
     if (authType === 'email') {
+        console.log('__EMAIL__', userData)
+
         if (!userData) {
             const params = {
                 uuid,
-                profile: { name: userDetails.name.split(' ')[0] },
+                profile: { email: userDetails.attributes.email },
                 meets: [],
                 attending: []
             }
 
             try {
                 const createUserRes = yield call(createNewUser, params)
-                console.log(createUserRes)
+                console.log(createUserRes, '__USER-CREATED__')
+                const { attending, meets, profile } = createUserRes.data.createUser
+                // load current user details we have to store with action
+                yield put({ type: USER_DATA_LOADED, payload: { attending, meets, profile } })
+                // user authed and ready
+                yield put({ type: AUTH_SUCCESS })
             } catch (e) {
                 console.log(e, 'error creating new user')
             }
         } else {
             yield put({ type: USER_DATA_LOADED, payload: userData })
+            yield put({ type: AUTH_SUCCESS })
         }
 
     } else if (authType === 'social') {
@@ -51,15 +59,15 @@ export function* handleAuth(action: any) {
         if (!userData) {
             const name = userDetails.name.split(' ')[0]
 
-            let profile: { name: string, email?: string } = {
+            let profileData: { name: string, email?: string } = {
                 name
             }
             if (userDetails.email) {
-                profile = { ...profile, email: userDetails.email }
+                profileData = { ...profileData, email: userDetails.email }
             }
             const params = {
                 uuid,
-                profile,
+                profile: profileData,
                 meets: [],
                 attending: []
             }
@@ -67,16 +75,20 @@ export function* handleAuth(action: any) {
             try {
 
                 const createUserRes = yield call(createNewUser, params)
-                console.log(createUserRes)
-
+                console.log(createUserRes, '__USER-CREATED__')
+                const { attending, meets, profile } = createUserRes.data.createUser
                 // load current user details we have to store with action
-
+                yield put({ type: USER_DATA_LOADED, payload: { attending, meets, profile } })
+                // user authed and ready
+                yield put({ type: AUTH_SUCCESS })
             } catch (e) {
                 console.log(e)
             }
         } else {
-            yield put({ type: USER_DATA_LOADED, payload: userData })
             // load user profile
+            yield put({ type: USER_DATA_LOADED, payload: userData })
+            yield put({ type: AUTH_SUCCESS })
+
         }
     }
 }

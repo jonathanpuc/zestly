@@ -1,4 +1,4 @@
-import { AUTH_SUCCESS, USER_DATA_LOADED } from './types'
+import { HANDLE_AUTH, USER_DATA_LOADED } from './types'
 
 
 // interface IUserPayload {
@@ -26,9 +26,9 @@ export const loadUser = (payload: any) => {
     }
 }
 
-export const authSuccess = (authType: string) => {
+export const handleAuth = (authType: string) => {
     return {
-        type: AUTH_SUCCESS,
+        type: HANDLE_AUTH,
         payload: authType
     }
 }
