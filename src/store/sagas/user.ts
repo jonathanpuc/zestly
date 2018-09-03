@@ -22,14 +22,15 @@ export function* handleAuth(action: any) {
     const authType = action.payload
     const userDetails = yield call(getAuthedUserDetails)
     console.log(userDetails)
-    const userDataRes = yield call(getUserData, userDetails.id)
+    const uuid = userDetails.id ? userDetails.id : userDetails.username
+    const userDataRes = yield call(getUserData, uuid)
     const userData = userDataRes.data.getUser
     console.log(userData)
 
     if (authType === 'email') {
         if (!userData) {
             const params = {
-                uuid: userDetails.id,
+                uuid,
                 profile: { name: userDetails.name.split(' ')[0] },
                 meets: [],
                 attending: []
@@ -57,7 +58,7 @@ export function* handleAuth(action: any) {
                 profile = { ...profile, email: userDetails.email }
             }
             const params = {
-                uuid: userDetails.id,
+                uuid,
                 profile,
                 meets: [],
                 attending: []
